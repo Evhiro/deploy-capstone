@@ -14,6 +14,7 @@ class PagesController < ApplicationController
         render "pages/Admin/_tableteacher"
     end
     def admin_accounts
+        @logins = Login.all
         render "pages/Admin/_accounts"
     end
     def admin_settings
@@ -32,7 +33,7 @@ class PagesController < ApplicationController
 
         #LOGIN COMMANDS
         def new
-        
+
         end
     
         def create

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root "pages#landing"
 
   get "/admin" => "pages#admin", as: "admin_login", account_type: "admin" 

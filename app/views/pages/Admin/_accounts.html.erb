@@ -9,10 +9,72 @@
             <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Settings", admin_settings_path %> </div>
         </nav>
         <div>
-            <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">REGISTER ACCOUNT</div>
-            <div class="border-[1px] border-solid border-black-500 h-96 md:m-5 mx-4">
-                
+            <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">MANAGE ACCOUNT</div>
+            <div 
+            class="border-[1px] border-solid border-black-500  mx-4 flex flex-col items-center justify-around h-fit
+            md:m-5 md:flex-row md:h-96">
+
+            <div>
+                <table class="border-[1px] border-black border-solid">
+                    <thead class="border-[1px] border-black border-solid">
+                         <tr>
+                            <th class="border-[1px] border-black border-solid">ID</th>
+                            <th class="border-[1px] border-black border-solid">Email</th>
+                            <th class="border-[1px] border-black border-solid">Account Type</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                        <% @logins.each do |login| %>
+                        <tr class="border-[1px] border-black border-solid">
+                            <td class="border-[1px] border-black border-solid"><%= login.id %></td>
+                            <td class="border-[1px] border-black border-solid"><%= login.email %></td>
+                            <td class="border-[1px] border-black border-solid"><%= login.account_type %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
             </div>
+
+            <form action="<%= admin_log_path %>" method="POST">
+
+            <label for="email"
+            class="text-green-500
+            "> 
+            Email:
+            </label>
+            <br>
+            <input type="text" type="email" name="email" id="email" 
+            class="
+            " 
+            required>
+            <br>
+
+            <label for="email"
+            class="text-green-500
+            "> 
+            Password:
+            </label>
+            <br>
+            <input type="password" type="password" name="password" id="password" 
+            class="
+            " 
+            required>
+            <br>
+            <label for="">Account Type:</label>
+            <br>
+            <select name="accountType" id="accountType" required>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+            </select>
+            <br>
+
+            <input type="submit" value="Register" 
+            class="bg-green-500 border-[1px] border-solid border-black w-20 mt-4
+            ">
+            
+        </form>
+            
+        </div>
         </div>
     </main>
 </body>
