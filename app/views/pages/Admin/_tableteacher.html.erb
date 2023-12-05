@@ -1,0 +1,18 @@
+<body class="">
+    <%= render "pages/Admin/header" %>
+    <main class="flex">
+        <nav id="menu" class="border-r-[1px] shadow-lg border-solid border-black-400 w-64 h-[90vh] hidden md:inline">
+            <div class="text-gray-600 text-sm text-center p-3">MENU BAR --></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500" aria-current="page"><%= link_to "Student Database", student_table_path %></div>
+            <div class="font-semibold p-2 bg-slate-100 border-l-4 border-green-500"><%= link_to "Teacher Database", teacher_table_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Register Account", admin_accounts_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Settings", admin_settings_path %> </div>
+        </nav>
+        <div>
+            <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">TEACHER DATABASE</div>
+            <div class="border-[1px] border-solid border-black-500 h-96 md:m-5 mx-4">
+                
+            </div>
+        </div>
+    </main>
+</body>

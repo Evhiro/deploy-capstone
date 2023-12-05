@@ -1,0 +1,64 @@
+<body class="flex flex-col 
+md:items-center">
+    <div class="hidden 
+    md:mt-14 md:text-center md:mb-5 md:block">
+        LOGO
+    </div>
+    <div class="text-center">
+        <p 
+        class="text-3xl text-center my-10
+        md:text-4xl md:my-10 text-green-500">
+        School Communication
+        </p>
+    </div>
+    <div class="flex flex-col border-2 border-black-500 items-center h-64
+    md:h-72 md:w-[600px] md:rounded-lg md:bg-white-200">
+        <form action="<%= admin_log_path %>" method="POST">
+            <h1 class="text-xl text-green-500 font-bold my-5 text-center
+            ">
+            Admin Login
+            </h1>
+
+            <label for="email"
+            class="text-green-500
+            "> 
+            Email:
+            </label>
+            <br>
+            <input type="text" type="email" name="email" id="email" 
+            class="
+            " 
+            required>
+            <br>
+
+            <label for="email"
+            class="text-green-500
+            "> 
+            Password:
+            </label>
+            <br>
+            <input type="password" type="password" name="password" id="password" 
+            class="
+            " 
+            required>
+            <br>
+            <div class="flex justify-between">
+
+            <%= link_to "Back", root_path,
+            class: "bg-green-500 border-[1px] border-solid border-black w-20 mt-4 text-center
+            "%> 
+
+
+            <input type="submit" value="Login" 
+            class="bg-green-500 border-[1px] border-solid border-black w-20 mt-4
+            ">
+
+            <!-- CSRF token -->
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <!-- Add a hidden field for account type -->
+            <input type="hidden" name="account_type" value="admin">
+            
+            </div>
+        </form>
+    </div>
+</body>

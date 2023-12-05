@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": true
+            },
+            "previewLimit": 50,
+            "server": "dpg-clmtp938772c73e1hrvg-a.singapore-postgres.render.com",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "Scaas-v1",
+            "database": "final_capstone_c8le",
+            "username": "evhiro",
+            "password": "eLN8FdqImq3ZNvJkys65SErlJwdCcnzE"
+        }
+    ]
+}
