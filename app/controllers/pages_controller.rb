@@ -43,9 +43,11 @@ class PagesController < ApplicationController
             account_type = params[:account_type]
 
             email = "#{lname.downcase.gsub(' ', '')}.#{fname.downcase.gsub(' ', '')}"
-            password = "#{birth[-4..-1]}-#{birth[0..1]}-#{birth[3..4]}"
+            password = birth
 
-            Login.create(email: email, password_digest: BCrypt::Password.create(password), account_type: account_type)
+            hashed_password = BCrypt::Password.create(password)
+            
+            Login.create(email: email, password_digest: hashed_password, account_type: account_type.downcase)
 
             if account_type == "student"
               Student.create(email: email, e_address: e_address, fname: fname, lname: lname, birth: birth)
