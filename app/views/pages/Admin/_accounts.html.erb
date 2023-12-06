@@ -5,64 +5,73 @@
             <div class="text-gray-600 text-sm text-center p-3">MENU BAR --></div>
             <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500" aria-current="page"><%= link_to "Student Database", student_table_path %></div>
             <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Teacher Database", teacher_table_path %> </div>
-            <div class="font-semibold p-2 bg-slate-100 border-l-4 border-green-500"><%= link_to "Register Account", admin_accounts_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Create Section", admin_settings_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "View Section", admin_settings_path %> </div>
+            <div class="font-semibold p-2 bg-slate-100 border-l-4 border-green-500"><%= link_to "Accounts", admin_accounts_path %> </div>
             <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Settings", admin_settings_path %> </div>
         </nav>
         <div>
             <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">MANAGE ACCOUNT</div>
             <div 
-            class="border-[1px] border-solid border-black-500  mx-4 flex flex-col items-center justify-around h-fit
+            class="md:border-[1px] md:border-solid md:border-black-500  mx-4 flex flex-col items-center justify-around h-fit
             md:m-5 md:flex-row md:h-96">
 
-            <div>
-                <table class="border-[1px] border-black border-solid">
-                    <thead class="border-[1px] border-black border-solid">
-                         <tr>
-                            <th class="border-[1px] border-black border-solid">ID</th>
-                            <th class="border-[1px] border-black border-solid">Email</th>
-                            <th class="border-[1px] border-black border-solid">Account Type</th>
-                         </tr>
-                    </thead>
-                    <tbody>
-                        <% @logins.each do |login| %>
-                        <tr class="border-[1px] border-black border-solid">
-                            <td class="border-[1px] border-black border-solid"><%= login.id %></td>
-                            <td class="border-[1px] border-black border-solid"><%= login.email %></td>
-                            <td class="border-[1px] border-black border-solid"><%= login.account_type %></td>
-                        </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
+            <form action="<%= admin_insert_info_path %>" method="POST">
 
-            <form action="<%= admin_log_path %>" method="POST">
-
-            <label for="email"
+            <label for="lname"
             class="text-green-500
             "> 
-            Email:
+            Last Name:
             </label>
             <br>
-            <input type="text" type="email" name="email" id="email" 
+            <input type="text" type="lname" name="lname" id="lname" 
             class="
             " 
             required>
             <br>
 
-            <label for="email"
+            <label for="fname"
             class="text-green-500
             "> 
-            Password:
+            First Name:
             </label>
             <br>
-            <input type="password" type="password" name="password" id="password" 
+            <input type="text" type="fname" name="fname" id="fname" 
             class="
             " 
             required>
             <br>
-            <label for="">Account Type:</label>
+
+            <label for="birth"
+            class="text-green-500
+            "> 
+            Birthday:
+            </label>
             <br>
-            <select name="accountType" id="accountType" required>
+            <input type="date" type="birth" name="birth" id="birth" 
+            class="
+            " 
+            required>
+            <br>
+
+            <label for="e_address"
+            class="text-green-500
+            "> 
+            Address:
+            </label>
+            <br>
+            <input type="text" type="e_address" name="e_address" id="e_address" 
+            class="
+            " 
+            required>
+            <br>
+
+            <label for="account_type"
+            class="text-green-500">
+            Account Type:
+            </label>
+            <br>
+            <select name="account_type" id="account_type" required>
                 <option value="student">Student</option>
                 <option value="teacher">Teacher</option>
             </select>

@@ -12,9 +12,13 @@ Rails.application.routes.draw do
   get "/admin/accounts" => "pages#admin_accounts", as: "admin_accounts"
   get "/admin/settings" => "pages#admin_settings", as: "admin_settings"
 
-  post "/student/log", to: "pages#create", as:"student_log", account_type: "student"
-  post "/teacher/log", to: "pages#create", as:"teacher_log", account_type: "teacher"
-  post "/admin/student/log", to: "pages#create", as:"admin_log", account_type: "admin" 
+  #STUDENT
+  get "/student/dashboard" => "pages#student_dashboard", as:"student_dashboard"
+
+  post "/student/log", to: "pages#account_verify", as:"student_log", account_type: "student"
+  post "/teacher/log", to: "pages#account_verify", as:"teacher_log", account_type: "teacher"
+  post "/admin/log", to: "pages#account_verify", as:"admin_log", account_type: "admin"
+  post "/admin/create/info", to: "pages#create_student_teacher", as:"admin_insert_info"
 
 
 end

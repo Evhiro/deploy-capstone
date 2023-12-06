@@ -25,6 +25,12 @@
                 <a href="<%= teacher_table_path %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Teacher Table</a>
             </li>
             <li>
+                <a href="<%= teacher_table_path %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Create Section</a>
+            </li>
+            <li>
+                <a href="<%= teacher_table_path %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">View Section</a>
+            </li>
+            <li>
                 <a href="<%= admin_accounts_path %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Accounts</a>
             </li>
             <li>
@@ -38,7 +44,6 @@
 </nav>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
     const button = document.getElementById('dropdownInformationButton');
     const dropdown = document.getElementById('dropdownInformation');
 
@@ -57,6 +62,5 @@
     dropdown.addEventListener('click', function (event) {
         event.stopPropagation();
     });
-});
 
 </script>

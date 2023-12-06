@@ -25,6 +25,9 @@ class PagesController < ApplicationController
     def student
         render "pages/Student/_login"
     end
+    def student_dashboard
+      render "pages/Student/_dashboard"
+    end
 
     #TEACHER PAGES
     def teacher
@@ -32,11 +35,28 @@ class PagesController < ApplicationController
     end  
 
         #LOGIN COMMANDS
-        def new
+        def create_student_teacher
+            lname = params[:lname]
+            fname = params[:fname]
+            birth = params[:birth]
+            e_address = params[:e_address]
+            account_type = params[:account_type]
 
+            email = "#{lname.downcase.gsub(' ', '')}.#{fname.downcase.gsub(' ', '')}"
+            password = "#{birth[-4..-1]}-#{birth[0..1]}-#{birth[3..4]}"
+
+            Login.create(email: email, password_digest: BCrypt::Password.create(password), account_type: account_type)
+
+            if account_type == "student"
+              Student.create(email: email, e_address: e_address, fname: fname, lname: lname, birth: birth)
+            elsif account_type == "teacher"
+              Teacher.create(email: email,e_address: e_address, fname: fname, lname: lname, birth: birth)
+            end
+
+            redirect_to admin_accounts_path, notice: "Created Successfully"
         end
     
-        def create
+        def account_verify
             user = Login.find_by(email: params[:email])
         
             if user && user.authenticate(params[:password]) && user.account_type == params[:account_type]
