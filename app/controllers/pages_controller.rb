@@ -1,6 +1,12 @@
 class PagesController < ApplicationController
+    before_action :require_login, except: [:landing, :getstarted, :admin, :student, :teacher, :login_check, :account_verify]
+    
+
     def landing
         render "pages/_landing"
+    end
+    def getstarted
+      render "pages/_start"
     end
 
     #ADMIN PAGES
@@ -54,8 +60,9 @@ class PagesController < ApplicationController
             elsif account_type == "teacher"
               Teacher.create(email: email,e_address: e_address, fname: fname, lname: lname, birth: birth)
             end
-
-            redirect_to admin_accounts_path, notice: "Created Successfully"
+            secret_key = Rails.application.credentials.secret_key_base
+            obfuscated_email = Digest::SHA256.hexdigest("#{user.email}-#{secret_key}")
+            redirect_to admin_accounts_path(email: obfuscated_email), notice: "Created Successfully"
         end
     
         def account_verify
@@ -63,14 +70,16 @@ class PagesController < ApplicationController
         
             if user && user.authenticate(params[:password]) && user.account_type == params[:account_type]
               session[:user_id] = user.id
+              secret_key = Rails.application.credentials.secret_key_base
+              obfuscated_email = Digest::SHA256.hexdigest("#{user.email}-#{secret_key}")
         
               case params[:account_type]
               when "admin"
-                redirect_to student_table_path
+                redirect_to student_table_path(email: obfuscated_email)
               when "student"
-                redirect_to student_dashboard_path
+                redirect_to student_dashboard_path(email: obfuscated_email)
               when "teacher"
-                redirect_to teacher_dashboard_path
+                redirect_to teacher_dashboard_path(email: obfuscated_email)
               else
                 redirect_to root_path
               end
@@ -79,9 +88,47 @@ class PagesController < ApplicationController
               redirect_to root_path
             end
           end
-    
-        def destroy
-            session[:user_id] = nil
-            redirect_to root_path, notice: 'Logged out successfully!'
+        
+          def login_check
+            if logged_in?
+              secret_key = Rails.application.credentials.secret_key_base
+              obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+              case current_user.account_type
+              when "admin"
+                redirect_to student_table_path(email: obfuscated_email)
+              when "student"
+                redirect_to student_dashboard_path(email: obfuscated_email)
+              when "teacher"
+                redirect_to teacher_dashboard_path(email: obfuscated_email)
+              end
+            elsif !logged_in?
+              redirect_to landing_path
+            end
+          end
+          
+
+        def sign_out
+          session[:user_id] = nil
+          reset_session
+          redirect_to root_path, notice: 'Logged out successfully!'
+      end
+        
+                
+        helper_method :current_user
+        private
+      
+        def current_user
+          @current_user ||= Login.find_by(id: session[:user_id]) if session[:user_id]
+        end
+        
+        def logged_in?
+          !current_user.nil?
+        end
+        
+        def require_login
+          unless logged_in?
+            flash[:alert] = 'You must be logged in to access this page.'
+            redirect_to root_path
+          end
         end
 end

@@ -1,6 +1,63 @@
-<nav class="flex justify-between items-center border-b-[1px] border-solid border-black-400 shadow-lg h-14 bg-green-600 text-white">
+<nav class="flex justify-between items-center border-b-[1px] border-solid border-black-400 shadow-lg h-14 bg-green-600 text-white relative">
     <ul class="list-none flex justify-around gap-32 pl-5">
-        <li class="text-lg font-bold">Teacher</li>
+        <li class="text-lg font-bold">ADMIN</li>
     </ul>
-    <div class="mr-5 font-bold"><%= link_to "Sign Out", root_path %> </div>
+
+    <div class="mr-5 font-bold hidden md:inline"><%= link_to "Sign Out", root_path %> </div>
+
+    <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" class="text-white font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center md:hidden" type="button">
+        <svg class="w-7 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+        </svg>
+    </button>
+
+    <!-- Dropdown menu -->
+    <div id="dropdownInformation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow absolute top-full mt-1 right-2 w-44 dark:bg-gray-700 dark:divide-gray-600">
+        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+            <div>Evhiro Desu</div>
+            <div class="font-medium truncate">evhiro@admin.com</div>
+        </div>
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
+            <li>
+                <a href="<%= student_table_path %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+            </li>
+            <li>
+                <a href="<%= teacher_table_path %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Announcement</a>
+            </li>
+            <li>
+                <a href="<%= teacher_table_path %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Schedule</a>
+            </li>
+            <li>
+                <a href="<%= teacher_table_path %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Grades</a>
+            </li>
+            <li>
+                <a href="<%= admin_settings_path %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+            </li>
+        </ul>
+        <div class="py-2">
+            <%= link_to "Sign Out", sign_out_path, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %> 
+        </div>
+    </div>
 </nav>
+
+<script>
+    const button = document.getElementById('dropdownInformationButton');
+    const dropdown = document.getElementById('dropdownInformation');
+
+    button.addEventListener('click', function (event) {
+        event.stopPropagation();
+        dropdown.classList.toggle('hidden');
+    });
+        // Close the dropdown when clicking outside of it
+    document.addEventListener('click', function (event) {
+        if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+
+    // Prevent dropdown from closing when clicking on a link inside it
+    dropdown.addEventListener('click', function (event) {
+        event.stopPropagation();
+    });
+
+</script>
