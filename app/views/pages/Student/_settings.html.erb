@@ -1,0 +1,35 @@
+<body class="">
+    <%= render "pages/Student/header" %>
+    <main class="flex">
+        <nav id="menu" class="border-r-[1px] shadow-lg border-solid border-black-400 w-64 h-[90vh] hidden md:inline">
+            <div class="text-gray-600 text-sm text-center p-3">MENU BAR --></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500" aria-current="page"><%= link_to "Dashboard", student_dashboard_path %></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Announcement", student_announcement_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Schedule", student_schedule_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Grades", student_grades_path %> </div>
+            <div class="font-semibold p-2 bg-slate-100 border-l-4 border-green-500"><%= link_to "Settings", student_settings_path %> </div>
+        </nav>
+        <div>
+            <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">ACCOUNT: <%= "#{current_person.fname.upcase} #{current_person.lname.upcase}"%></div>
+            <div class="md:border-[1px] md:border-solid md:border-black-500 h-96 md:m-5 mx-4">
+                <div>
+                    <p>PROFILE</p>
+                    <p>NAME: <%= "#{current_person.fname} #{current_person.lname}" %></p>
+                    <p>EMAIL:<%= current_user.email %></p>
+                </div>
+                <div>CHANGE PASSWORD</div>
+                    <form action="<%= change_password_path %>" method="PATCH">
+                    <label for="password">Password:</label>
+                    <br>
+                    <input type="password" name="password" id="password">
+                    <br>
+                    <label for="new_password">New Password:</label>
+                    <br>
+                    <input type="password" name="new_password" id="new_password">
+                    <br>
+                    <input type="submit" value="Change">
+                </form>
+            </div>
+        </div>
+    </main>
+</body>

@@ -1,0 +1,55 @@
+<body class="">
+    <%= render "pages/Student/header" %>
+    <main class="flex">
+        <nav id="menu" class="border-r-[1px] shadow-lg border-solid border-black-400 w-64 h-[90vh] hidden md:inline">
+            <div class="text-gray-600 text-sm text-center p-3">MENU BAR --></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500" aria-current="page"><%= link_to "Dashboard", student_dashboard_path %></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Announcement", student_announcement_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Schedule", student_schedule_path %> </div>
+            <div class="font-semibold p-2 bg-slate-100 border-l-4 border-green-500"><%= link_to "Grades", student_grades_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Settings", student_settings_path %> </div>
+        </nav>
+        <div>
+            <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">ACCOUNT: <%= "#{current_person.fname.upcase} #{current_person.lname.upcase}"%></div>
+            <div class="md:border-[1px] md:border-solid md:border-black-500 h-96 md:m-5 mx-4 text-center">
+                <div class="shadow-md border-2 border-black">
+                    <p class="text-green-500 text-bold text-xl shadow-md mb-6 
+                    "
+                    >STUDENT SCHEDULE
+                    </p>
+                <div class="flex justify-around">
+                    <p class="text-bold text-left text-sm 
+                    "
+                    ><span class="text-md text-bold text-green-500">NAME:</span> <%= "#{current_person.fname.upcase} #{current_person.lname.upcase}"%>
+                    </p>
+                    <p class="text-bold text-right text-sm 
+                    "
+                    ><span class="text-md text-green-500 text-bold">SECTION:</span> PAPAYA
+                    </p>
+                </div>
+                <div class="flex justify-center mt-7 mb-10">
+                    <table class="border border-solid border-black p-2">
+                        <thead class="border border-solid border-black text-[14px] text-green-500">
+                            <td class="border border-solid border-black">SUBJECT</td>
+                            <td class="border border-solid border-black">TEACHER</td>
+                            <td class="border border-solid border-black">P1</td>
+                            <td class="border border-solid border-black">P2</td>
+                            <td class="border border-solid border-black">P3</td>
+                            <td class="border border-solid border-black">AVE.</td>
+                            <td class="border border-solid border-black">RESULT</td>
+                        </thead>
+                        <tbody class="border border-solid border-black text-[12px]">
+                            <td class="border border-solid border-black">ENGLISH</td>
+                            <td class="border border-solid border-black">MR.NOBODY</td>
+                            <td class="border border-solid border-black">95</td>
+                            <td class="border border-solid border-black">94</td>
+                            <td class="border border-solid border-black">96</td>
+                            <td class="border border-solid border-black">95.0</td>
+                            <td class="border border-solid border-black">PASSED</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>

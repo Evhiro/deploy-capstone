@@ -34,6 +34,18 @@ class PagesController < ApplicationController
     def student_dashboard
       render "pages/Student/_dashboard"
     end
+    def student_settings
+      render "pages/Student/_settings"
+    end
+    def student_announcement
+      render "pages/Student/_announcement"
+    end
+    def student_grades
+      render "pages/Student/_grades"
+    end
+    def student_schedule
+      render "pages/Student/_schedule"
+    end
 
     #TEACHER PAGES
     def teacher
@@ -114,7 +126,22 @@ class PagesController < ApplicationController
               end
             end
           end
-          
+        
+        #NOT WORKING
+        def change_password
+          user = current_user
+      
+          if user.password == user.params[:password]
+            redirect_to root_path
+            if 
+              redirect_to sign_out_path
+            else
+
+            end
+          else
+
+          end
+        end  
 
         def sign_out
           session[:user_id] = nil
