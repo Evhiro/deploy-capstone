@@ -16,8 +16,8 @@
     <!-- Dropdown menu -->
     <div id="dropdownInformation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow absolute top-full mt-1 right-2 w-44 dark:bg-gray-700 dark:divide-gray-600">
         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-            <div>Evhiro Desu</div>
-            <div class="font-medium truncate">evhiro@admin.com</div>
+            <div><%= "#{current_person.fname} #{current_person.lname}" %></div>
+            <div class="font-medium truncate"><%= current_user.email %></div>
         </div>
         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
             <li>

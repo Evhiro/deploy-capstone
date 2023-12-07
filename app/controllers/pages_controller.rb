@@ -102,7 +102,16 @@ class PagesController < ApplicationController
                 redirect_to teacher_dashboard_path(email: obfuscated_email)
               end
             elsif !logged_in?
-              redirect_to landing_path
+              case params[:account_type]
+              when "admin"
+                redirect_to admin_login_path
+              when "student"
+                redirect_to student_login_path
+              when "teacher"
+                redirect_to teacher_login_path
+              else
+                redirect_to landing_path
+              end
             end
           end
           
@@ -114,21 +123,29 @@ class PagesController < ApplicationController
       end
         
                 
-        helper_method :current_user
-        private
+      helper_method :current_user, :current_person
+      private
       
-        def current_user
-          @current_user ||= Login.find_by(id: session[:user_id]) if session[:user_id]
+      def current_user
+        @current_user ||= Login.find_by(id: session[:user_id]) if session[:user_id]
+      end
+      
+      def current_person
+        if current_user
+          @current_person ||= current_user.student || current_user.teacher
         end
-        
-        def logged_in?
-          !current_user.nil?
+      end
+      
+      
+      def logged_in?
+        !current_user.nil?
+      end
+      
+      def require_login
+        unless logged_in?
+          flash[:alert] = 'You must be logged in to access this page.'
+          redirect_to root_path
         end
-        
-        def require_login
-          unless logged_in?
-            flash[:alert] = 'You must be logged in to access this page.'
-            redirect_to root_path
-          end
-        end
+      end
+      
 end
