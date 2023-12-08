@@ -13,8 +13,30 @@
         </nav>
         <div>
             <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">STUDENT DATABASE</div>
-            <div class="border-[1px] border-solid border-black-500 h-96 md:m-5 mx-4">
-                
+            <div class="h-96 md:m-5 mx-4">
+                <div class="shadow-md border-2 border-black mb-10">
+                    <div class="text-center">
+                        <p class="text-green-500 text-bold text-xl shadow-md mb-6
+                        "
+                        >Student Table
+                        </p>
+                    </div>
+                    <div class="md:flex">
+
+                          <% @students.each_slice(5) do |students_slice| %>
+                            <div class="flex flex-col md:w-60 overflow-scroll">
+                              <% students_slice.each do |student| %>
+                                <div class="border border-black border-solid rounded-md mb-4 ml-2">
+                                  <p class="border-b shadow p-2"><span class="text-green-500">Name:</span> <%= "#{student.fname} #{student.lname}" %></p>
+                                  <p class="p-2"><span class="text-green-500">Email:</span> <%= student.email %></p>
+                                </div>
+                              <% end %>
+                            </div>
+                          <% end %>
+
+
+                    </div>
+                </div>
             </div>
         </div>
     </main>

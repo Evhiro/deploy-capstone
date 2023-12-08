@@ -14,6 +14,7 @@ class PagesController < ApplicationController
         render "pages/Admin/_login"
     end
     def student_table
+        @students = Student.all
         render "pages/Admin/_tablestudent"
     end
     def teacher_table

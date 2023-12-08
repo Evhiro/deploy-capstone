@@ -13,78 +13,99 @@
         </nav>
         <div>
             <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">MANAGE ACCOUNT</div>
-            <div 
-            class="md:border-[1px] md:border-solid md:border-black-500  mx-4 flex flex-col items-center justify-around h-fit
-            md:m-5 md:flex-row md:h-96">
+            <div class="h-96 md:m-5 mx-4">
+                <div class="shadow-md border-2 border-black mb-10">
+                    <div class="text-center">
+                        <p class="text-green-500 text-bold text-xl shadow-md mb-6
+                        "
+                        >CREATE ACCOUNT
+                        </p>
+                    </div>
+                    <div class="md:flex">
+                         <form action="<%= admin_insert_info_path %>" method="POST" class="p-3">
 
-            <form action="<%= admin_insert_info_path %>" method="POST">
+                         <label for="lname"
+                         class="text-green-500 text-[15px]
+                         "> 
+                         Last Name:
+                         </label>
+                         <input type="text" type="lname" name="lname" id="lname" 
+                         class="w-46 rounded-md text-[12px]
+                         "
+                         required>
+                         <br class="m-5">
 
-            <label for="lname"
-            class="text-green-500
-            "> 
-            Last Name:
-            </label>
-            <br>
-            <input type="text" type="lname" name="lname" id="lname" 
-            class="
-            " 
-            required>
-            <br>
+                         <label for="fname"
+                         class="text-green-500 text-[15px]
+                         "> 
+                         First Name:
+                         </label>
+                         <input type="text" type="fname" name="fname" id="fname" 
+                         class="w-46 rounded-md text-[12px]
+                         "
+                         required>
+                         <br class="m-5">
 
-            <label for="fname"
-            class="text-green-500
-            "> 
-            First Name:
-            </label>
-            <br>
-            <input type="text" type="fname" name="fname" id="fname" 
-            class="
-            " 
-            required>
-            <br>
+                         <label for="birth"
+                         class="text-green-500 text-[15px]
+                         "> 
+                         Birthday:
+                         </label>
+                         <input type="date" type="birth" name="birth" id="birth" 
+                         class="w-46 rounded-md text-[12px] ml-4
+                         " 
+                         required>
+                         <br class="m-5">
 
-            <label for="birth"
-            class="text-green-500
-            "> 
-            Birthday:
-            </label>
-            <br>
-            <input type="date" type="birth" name="birth" id="birth" 
-            class="
-            " 
-            required>
-            <br>
+                         <label for="e_address"
+                         class="text-green-500 text-[15px]
+                         "> 
+                         Address:
+                         </label>
+                         <input type="text" type="e_address" name="e_address" id="e_address" 
+                         class="w-46 rounded-md text-[12px] ml-4
+                         " 
+                         required>
+                         <br class="m-5">
 
-            <label for="e_address"
-            class="text-green-500
-            "> 
-            Address:
-            </label>
-            <br>
-            <input type="text" type="e_address" name="e_address" id="e_address" 
-            class="
-            " 
-            required>
-            <br>
+                         <label for="account_type"
+                         class="text-green-500 text-[12px]">
+                         Account Type:
+                         </label>
+                         <select name="account_type" id="account_type" 
+                         class="text-[12px] w-26 rounded-md
+                        " 
+                        required>
+                             <option value="student">Student</option>
+                             <option value="teacher">Teacher</option>
+                         </select>
+                         <br class="m-5">
 
-            <label for="account_type"
-            class="text-green-500">
-            Account Type:
-            </label>
-            <br>
-            <select name="account_type" id="account_type" required>
-                <option value="student">Student</option>
-                <option value="teacher">Teacher</option>
-            </select>
-            <br>
+                         <div class="text-center md:text-left md:ml-16">
+                            <br>
+                            <input type="submit" value="Register" 
+                            class=" bg-green-900 w-40 h-10 text-white text-bold border hover:cursor-pointer
+                            ">
+                        </div>
+                        <br>
+                     </form>
 
-            <input type="submit" value="Register" 
-            class="bg-green-500 border-[1px] border-solid border-black w-20 mt-4
-            ">
-            
-        </form>
-            
-        </div>
+
+                          <% @logins.each_slice(5) do |logins_slice| %>
+                            <div class="flex flex-col md:w-60 overflow-scroll">
+                              <% logins_slice.each do |login| %>
+                                <div class="border border-black border-solid rounded-md mb-4 ml-2">
+                                  <p class="border-b shadow p-2"><span class="text-green-500">Email:</span> <%= login.email %></p>
+                                  <p class="p-2"><span class="text-green-500">Account Type:</span> <%= login.account_type %></p>
+                                </div>
+                              <% end %>
+                            </div>
+                          <% end %>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </body>
