@@ -1,0 +1,147 @@
+<body class="">
+    <%= render "pages/Admin/header" %>
+    <main class="flex">
+        <nav id="menu" class="border-r-[1px] shadow-lg border-solid border-black-400 w-64 h-[90vh] hidden md:inline">
+            <div class="text-gray-600 text-sm text-center p-3">MENU BAR --></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]" aria-current="page"><%= link_to "Student Database", student_table_path %></div>
+            <div class="font-semibold p-2 bg-slate-100 border-l-4 border-green-500 text-[15px] text-green-500"><%= link_to "Teacher Database", teacher_table_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Create Announcement", teacher_table_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Create Section", admin_settings_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "View Section", admin_settings_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Accounts", admin_accounts_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Settings", admin_settings_path %> </div>
+        </nav>
+        <div>
+            <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">TEACHER DATABASE</div>
+            <div class="md:border-[1px] md:border-solid md:border-black-500 h-96 md:m-5 mx-4">
+                <div class="shadow-md border-2 border-black mb-10">
+                    <div class="text-center">
+                        <p class="text-green-500 text-bold text-xl shadow-md mb-6
+                        "
+                        >CREATE SECTION
+                        </p>
+                    </div>
+                    <form action="" class="p-2">
+                        <label for="grade_lvl" 
+                        class=" text-[15px]
+                        ">
+                        Grade level:
+                        </label>
+                        <select name="grade_lvl" id="grade_lvl" 
+                        class="text-[12px] w-16 rounded-md
+                        ">
+                        <option value="">7</option>
+                        <option value="">8</option>
+                        <option value="">9</option>
+                        <option value="">10</option>
+                        </select>
+                        <br class="m-5">
+                        <label for="section_name" 
+                        class=" text-[15px]
+                        ">
+                        Section:
+                        </label>
+                        <input type="text" name="section_name" id="section_name" 
+                        class="w-46 rounded-md
+                        ">
+                        <br class="m-5">
+                        <label for="section_name" 
+                        class=" text-[15px]
+                        ">
+                        Advisor:
+                        </label>
+                        <input type="text" name="section_name" id="section_name" 
+                        class="w-46 rounded-md
+                        ">
+                        <br class="m-5">
+                        <div class="text-center mt-5">
+                        <input type="submit" value="Submit" 
+                        class=" bg-green-900 w-20 h-10 text-white text-bold border hover:cursor-pointer
+                        ">
+                        </div>
+                        <br>
+                    </form>
+
+                    <div class="text-center">
+                        <p class="text-green-500 text-bold text-xl shadow-md mt-2
+                        "
+                        >CREATE SCHEDULE
+                        </p>
+                    </div>
+
+                    <form action="" class="p-2">
+                        <br>
+                        <label for="grade_lvl" 
+                        class=" text-[15px]
+                        ">
+                        Section:
+                        </label>
+                        <select name="grade_lvl" id="grade_lvl" 
+                        class="text-[12px] w-30 rounded-md
+                        ">
+                        <option value="">PAPAYA</option>
+                        <option value="">8</option>
+                        <option value="">9</option>
+                        <option value="">10</option>
+                        </select>
+                        <br class="m-5">
+
+                        <label for="section_name" 
+                        class=" text-[15px]
+                        ">
+                        Subject:
+                        </label>
+                        <input type="text" name="section_name" id="section_name" 
+                        class="w-46 rounded-md
+                        ">
+                        <br class="m-5">
+                        <label for="section_name" 
+                        class=" text-[15px]
+                        ">
+                        Teacher:
+                        </label>
+                        <input type="text" name="section_name" id="section_name" 
+                        class="w-46 rounded-md
+                        ">
+                        <br class="m-5">
+                        <label for="section_name" 
+                        class=" text-[15px]
+                        ">
+                        Time-in:
+                        </label>
+                        <input type="text" name="section_name" id="section_name" placeholder="00:00"
+                        class="w-16 rounded-md text-[13.5px]
+                        ">
+
+                        <label for="section_name" 
+                        class=" text-[15px]
+                        ">
+                        Time-out:
+                        </label>
+                        <input type="text" name="section_name" id="section_name" placeholder="00:00"
+                        class="w-16 rounded-md text-[13.5px]
+                        ">
+                        <br class="m-5">
+
+                        <label for="section_name" 
+                        class=" text-[15px]
+                        ">
+                        Day:
+                        </label>
+                        <input type="text" name="section_name" id="section_name" placeholder="M/TH/W/T/F/SAT"
+                        class="w-36 rounded-md text-[13.5px]
+                        ">
+                        <br class="m-5">
+
+                        <div class="text-center mt-5">
+                        <input type="submit" value="Submit" 
+                        class=" bg-green-900 w-20 h-10 text-white text-bold border hover:cursor-pointer
+                        ">
+                        </div>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
