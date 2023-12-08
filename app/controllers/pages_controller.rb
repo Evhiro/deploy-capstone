@@ -167,7 +167,7 @@ class PagesController < ApplicationController
 
         def sign_out
           session[:user_id] = nil
-          reset_session
+          session.clear
           redirect_to landing_path, notice: 'Logged out successfully!'
       end
         
