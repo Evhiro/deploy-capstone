@@ -157,24 +157,21 @@ class PagesController < ApplicationController
         #NOT WORKING
         def change_password
           user = current_user
-      
-          if user.password == user.params[:password]
-            redirect_to landing_path
-            if 
-              redirect_to sign_out_path
-            else
+          if user && user.authenticate(params[:password])
+            new_password = params[:new_password]
+            hashed_password = BCrypt::Password.create(new_password)
 
-            end
+            user.update!(password_digest: hashed_password)
+            redirect_to sign_out_path
           else
-
+            redirect_to root_path
           end
         end  
 
         def sign_out
-          session[:user_id] = nil
           session.clear
           redirect_to landing_path, notice: 'Logged out successfully!'
-      end
+        end
         
                 
       helper_method :current_user, :current_person

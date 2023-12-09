@@ -1,0 +1,1 @@
+SELECT password_digest FROM logins WHERE password_digest = 'desired_p';
