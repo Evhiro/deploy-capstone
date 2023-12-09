@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get "/admin/:email/settings" => "pages#admin_settings", as: "admin_settings"
   get "/admin/:email/create-section" => "pages#create_section", as: "create_section"
   get "/admin/:email/view-section" => "pages#view_section", as: "view_section"
+  get "/admin/:email/announcement" => "pages#admin_announcement", as: "admin_announcement"
 
   #STUDENT
   get "/student/:email/dashboard" => "pages#student_dashboard", as: "student_dashboard"

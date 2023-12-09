@@ -18,6 +18,7 @@ class PagesController < ApplicationController
         render "pages/Admin/_tablestudent"
     end
     def teacher_table
+        @teachers = Teacher.all
         render "pages/Admin/_tableteacher"
     end
     def admin_accounts
@@ -32,6 +33,9 @@ class PagesController < ApplicationController
     end
     def view_section
       render "pages/Admin/_viewsection"
+    end
+    def admin_announcement
+      render "pages/Admin/_announcement"
     end
 
     #STUDENT PAGES

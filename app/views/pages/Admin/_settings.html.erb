@@ -5,22 +5,38 @@
             <div class="text-gray-600 text-sm text-center p-3">MENU BAR --></div>
             <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]" aria-current="page"><%= link_to "Student Database", student_table_path %></div>
             <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Teacher Database", teacher_table_path %> </div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Create Announcement", teacher_table_path %> </div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Create Section", admin_settings_path %> </div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "View Section", admin_settings_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Create Announcement", admin_announcement_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Create Section", create_section_path %> </div>
             <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Accounts", admin_accounts_path %> </div>
             <div class="font-semibold p-2 bg-slate-100 border-l-4 border-green-500 text-[15px] text-green-500"><%= link_to "Settings", admin_settings_path %> </div>
         </nav>
-        <div>
-            <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">SETTINGS</div>
+       <div>
+            <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2"></div>
             <div class="md:border-[1px] md:border-solid md:border-black-500 h-96 md:m-5 mx-4">
-                <div>
-                    <p>PROFILE</p>
-                    <p>NAME: </p>
-                    <p>EMAIL:<%= current_user.email %></p>
-                </div>
-                <div>CHANGE PASSWORD</div>
+                <div class="shadow-md border-2 border-black mb-10">
+                    <div class="text-center">
+                        <p class="text-green-500 text-bold text-xl shadow-md mb-6
+                        "
+                        >Profile
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>Current Email: @<%= current_user.email %></p>
+                        <p>Name: <%= "#{current_person&.fname} #{current_person&.lname}" %></p>
+                        <p>Birthday: <%= current_person&.birth&.strftime('%B %e, %Y') %> </</p>
+                        <p>Address: <%= current_person&.e_address %></</p>
+                    </div>
+
+                    <div class="text-center">
+                        <p class="text-green-500 text-bold text-xl shadow-md mt-2
+                        "
+                        >CHANGE PASSWORD
+                        </p>
+                    </div>
+
                 <form action="<%= change_password_path %>" method="PATCH">
+                    <br>
                     <label for="password">Password:</label>
                     <br>
                     <input type="password" name="password" id="password">
@@ -31,6 +47,7 @@
                     <br>
                     <input type="submit" value="Change">
                 </form>
+                </div>
             </div>
         </div>
     </main>
