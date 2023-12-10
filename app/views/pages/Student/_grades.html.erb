@@ -15,18 +15,32 @@
                 <div class="shadow-md border-2 border-black">
                     <p class="text-green-500 text-bold text-xl shadow-md mb-6 
                     "
-                    >STUDENT SCHEDULE
+                    >STUDENT INFO
                     </p>
-                <div class="flex justify-around">
+                <div class="flex flex-col justify-center items-center">
                     <p class="text-bold text-left text-sm 
                     "
                     ><span class="text-md text-bold text-green-500">NAME:</span> <%= "#{current_person.fname.upcase} #{current_person.lname.upcase}"%>
                     </p>
+
+                    <br>
+
                     <p class="text-bold text-right text-sm 
                     "
                     ><span class="text-md text-green-500 text-bold">SECTION:</span> PAPAYA
                     </p>
+
+                    <p class="text-bold text-right text-sm 
+                    "
+                    ><span class="text-md text-green-500 text-bold">GRADE:</span> 9
+                    </p>
                 </div>
+                <br>
+                <p class="text-green-500 text-bold text-xl shadow-md mb-6 
+                "
+                >STUDENT GRADES
+                </p>
+
                 <div class="flex justify-center mt-7 mb-10">
                     <table class="border border-solid border-black p-2">
                         <thead class="border border-solid border-black text-[14px] md:text-2xl text-green-500">
