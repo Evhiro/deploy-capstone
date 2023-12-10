@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
     before_action :require_login, except: [:landing, :getstarted, :admin, :student, :teacher, :login_check, :account_verify]
-    
+    before_action :authenticate_admin!, only: [:student_table, :teacher_table, :admin_announcement, :admin_accounts, :admin_settings]
+    before_action :authenticate_teacher!, only: [:teacher_dashboard, :teacher_announcement, :teacher_grades, :teacher_schedule, :teacher_settings]
+    before_action :authenticate_student!, only: [:student_dashboard, :student_announcement, :student_grades, :student_schedule,:student_settings]
 
     def landing
         render "pages/_landing"
@@ -197,6 +199,18 @@ class PagesController < ApplicationController
           flash[:alert] = 'You must be logged in to access this page.'
           redirect_to landing_path
         end
+      end
+
+      def authenticate_admin!
+        redirect_to account_check_path unless current_user && current_user.account_type == 'admin'
+      end
+    
+      def authenticate_teacher!
+        redirect_to account_check_path unless current_user && current_user.account_type == 'teacher'
+      end
+    
+      def authenticate_student!
+        redirect_to account_check_path unless current_user && current_user.account_type == 'student'
       end
       
 end

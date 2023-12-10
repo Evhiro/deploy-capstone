@@ -15,13 +15,18 @@
             <div class="h-96 md:m-5 mx-4">
                 <div class="shadow-md border-2 border-black mb-10">
                     <div class="text-center">
-                        <p class="text-green-500 text-bold text-xl shadow-md mb-6
+                        <p class="text-green-500 text-bold text-xl shadow-md
                         "
-                        >CREATE ACCOUNT
+                        >MANAGE ACCOUNT
                         </p>
                     </div>
                     <div class="md:flex">
-                         <form action="<%= admin_insert_info_path %>" method="POST" class="p-3">
+                         <form action="<%= admin_insert_info_path %>" method="POST" class="p-3 border-r border-black">
+
+                         <p class="text-green-500 text-bold text-xl border-b
+                         "
+                         >REGISTER 
+                         </p>  
 
                          <label for="lname"
                          class="text-green-500 text-[15px]
@@ -88,18 +93,24 @@
                         </div>
                         <br>
                      </form>
+                     
+                     
 
+                      <div class="flex flex-col md:w-[785px] overflow-scroll mt-5 m-3">
+                        <% @logins.each do |login| %>
+                          <div class="border border-black border-solid rounded-md mb-4 ml-2">
 
-                          <% @logins.each_slice(5) do |logins_slice| %>
-                            <div class="flex flex-col md:w-60 overflow-scroll">
-                              <% logins_slice.each do |login| %>
-                                <div class="border border-black border-solid rounded-md mb-4 ml-2">
-                                  <p class="border-b shadow p-2"><span class="text-green-500">Email:</span> <%= login.email %></p>
-                                  <p class="p-2"><span class="text-green-500">Account Type:</span> <%= login.account_type %></p>
-                                </div>
-                              <% end %>
-                            </div>
-                          <% end %>
+                            <p class="text-green-500 text-bold p-3
+                            "
+                            >ACCOUNT INFO
+                            </p>  
+
+                            <p class="border-b shadow p-1"><span class="text-green-500">Email:</span> <%= login.email %></p>
+                            <p class="p-1"><span class="text-green-500">Account Type:</span> <%= login.account_type %></p>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
 
 
                     </div>
