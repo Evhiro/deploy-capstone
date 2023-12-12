@@ -20,20 +20,20 @@
                         >CREATE SECTION
                         </p>
                     </div>
-                    <form action="" class="p-2">
+                    <form action="<%= add_section_path %>" method="POST" class="p-2 md:text-center">
                         <label for="grade_lvl" 
                         class=" text-[15px]
                         ">
                         Grade level:
                         </label>
                         <select name="grade_lvl" id="grade_lvl" 
-                        class="text-[12px] w-16 rounded-md
+                        class="text-[12px] w-20 rounded-md
                         " 
                         required>
-                        <option value="">7</option>
-                        <option value="">8</option>
-                        <option value="">9</option>
-                        <option value="">10</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
                         </select>
                         <br class="m-5">
                         <label for="section_name" 
@@ -45,14 +45,18 @@
                         class="w-46 rounded-md
                         ">
                         <br class="m-5">
-                        <label for="section_name" 
+                        <label for="advisor_name" 
                         class=" text-[15px]
                         ">
                         Advisor:
                         </label>
-                        <input type="text" name="section_name" id="section_name" 
-                        class="w-46 rounded-md
+                        <select name="advisor_name" id="advisor_name" 
+                        class="text-[12px] w-40 rounded-md
                         ">
+                        <% @teacher.each do |teacher| %>
+                        <option value="<%= "#{teacher.fname} #{teacher.lname}" %>"><%= "#{teacher.fname} #{teacher.lname}"%></option>
+                        <% end %>
+                        </select>
                         <br class="m-5">
                         <div class="text-center mt-5">
                         <input type="submit" value="Submit" 
@@ -65,73 +69,184 @@
                     <div class="text-center">
                         <p class="text-green-500 text-bold text-xl shadow-md mt-2
                         "
-                        >CREATE SCHEDULE
+                        >SUBJECT TEACHER
                         </p>
                     </div>
 
-                    <form action="" class="p-2">
+                    <form action="<%= add_subject_teacher_path %>" method="POST" class="p-2 md:text-center">
                         <br>
-                        <label for="grade_lvl" 
+                        <label for="section_name" 
                         class=" text-[15px]
                         ">
                         Section:
                         </label>
-                        <select name="grade_lvl" id="grade_lvl" 
+
+                        <select name="section_name" id="section_name" 
                         class="text-[12px] w-30 rounded-md
                         ">
-                        <option value="">PAPAYA</option>
-                        <option value="">KAMOTE</option>
-                        <option value="">PATATAS</option>
-                        <option value="">KAMATIS</option>
+                        <% @section.each do |section| %>
+                        <option value="<%= section.section_name %>"><%= section.section_name %></option>
+                        <% end %>
                         </select>
                         <br class="m-5">
 
-                        <label for="section_name" 
-                        class=" text-[15px]
-                        ">
-                        Subject:
-                        </label>
-                        <input type="text" name="section_name" id="section_name" 
-                        class="w-46 rounded-md
-                        ">
-                        <br class="m-5">
-                        <label for="section_name" 
+                        <label for="sub_teacher" 
                         class=" text-[15px]
                         ">
                         Teacher:
                         </label>
-                        <input type="text" name="section_name" id="section_name" 
-                        class="w-46 rounded-md
+                        <select name="sub_teacher" id="sub_teacher" 
+                        class="text-[12px] w-40 rounded-md
                         ">
+                        <% @teacher.each do |teacher| %>
+                        <option value="<%= "#{teacher.fname} #{teacher.lname}" %>"><%= "#{teacher.fname} #{teacher.lname}"%></option>
+                        <% end %>
+                        </select>
+
                         <br class="m-5">
+
+                        <label for="subject_name" 
+                        class=" text-[15px]
+                        ">
+                        Subject:
+                        </label>
+                        <select name="subject_name" id="subject_name" 
+                        class="text-[12px] w-30 rounded-md
+                        ">
+                        <% @subject.each do |subject| %>
+                        <option value="<%= subject.subject_name %>"><%= subject.subject_name %></option>
+                        <% end %>
+                        </select>
+                        <br class="m-5">
+
+                        <div class="text-center mt-5">
+                        <input type="submit" value="Submit" 
+                        class=" bg-green-900 w-20 h-10 text-white text-bold border hover:cursor-pointer
+                        ">
+                        </div>
+                        <br>
+                    </form>
+
+                    <div class="text-center">
+                        <p class="text-green-500 text-bold text-xl shadow-md mt-2
+                        "
+                        >ENROLL STUDENT
+                        </p>
+                    </div>
+
+                    <form action="<%= add_student_path %>" method="POST" class="p-2 md:text-center">
+                        <br>
                         <label for="section_name" 
+                        class=" text-[15px]
+                        ">
+                        Section:
+                        </label>
+                        <select name="section_name" id="section_name" 
+                        class="text-[12px] w-30 rounded-md
+                        ">
+                        <% @section.each do |section| %>
+                        <option value="<%= section.section_name %>"><%= section.section_name %></option>
+                        <% end %>
+                        </select>
+                        <br class="m-5">
+
+                        <label for="student_name" 
+                        class=" text-[15px]
+                        ">
+                        Student:
+                        </label>
+                        <select name="student_name" id="student_name" 
+                        class="text-[12px] w-40 rounded-md
+                        ">
+                        <% @student.each do |student| %>
+                        <option value="<%= "#{student.fname} #{student.lname}" %>"><%= "#{student.fname} #{student.lname}"%></option>
+                        <% end %>
+                        </select>
+
+                        <div class="text-center mt-5">
+                        <input type="submit" value="Submit" 
+                        class=" bg-green-900 w-20 h-10 text-white text-bold border hover:cursor-pointer
+                        ">
+                        </div>
+                        <br>
+                    </form>
+
+                        <div class="text-center">
+                        <p class="text-green-500 text-bold text-xl shadow-md mt-2
+                        "
+                        >SCHEDULE
+                        </p>
+                    </div>
+
+                    <form action="<%= add_schedule_path %>" method="POST" class="p-2 md:text-center">
+                        <br>
+                        <label for="section_name" 
+                        class=" text-[15px]
+                        ">
+                        Section:
+                        </label>
+                        <select name="section_name" id="section_name" 
+                        class="text-[12px] w-30 rounded-md
+                        ">
+                        <% @section.each do |section| %>
+                        <option value="<%= section.section_name %>"><%= section.section_name %></option>
+                        <% end %>
+                        </select>
+                        <br class="m-5">
+                        
+                        <label for="subject_name" 
+                        class=" text-[15px]
+                        ">
+                        Subject:
+                        </label>
+                        <select name="subject_name" id="subject_name" 
+                        class="text-[12px] w-30 rounded-md
+                        ">
+                        <% @subject.each do |subject| %>
+                        <option value="<%= subject.subject_name %>"><%= subject.subject_name %></option>
+                        <% end %>
+                        </select>
+                        <br class="m-5">
+
+                        <label for="time_in" 
                         class=" text-[15px]
                         ">
                         Time-in:
                         </label>
-                        <input type="text" name="section_name" id="section_name" placeholder="00:00"
+                        <input type="text" name="time_in" id="time_in" placeholder="00:00"
                         class="w-16 rounded-md text-[13.5px]
                         ">
+                        <select name="time_one" id="time_one"
+                        class="w-20 rounded-md text-[13.5px]"
+                        >
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
 
-                        <label for="section_name" 
+                        <label for="time_out" 
                         class=" text-[15px]
                         ">
                         Time-out:
                         </label>
-                        <input type="text" name="section_name" id="section_name" placeholder="00:00"
+                        <input type="text" name="time_out" id="time_out" placeholder="00:00"
                         class="w-16 rounded-md text-[13.5px]
                         ">
+                        <select name="time_two" id="time_two"
+                        class="w-20 rounded-md text-[13.5px]"
+                        >
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
                         <br class="m-5">
 
-                        <label for="section_name" 
+                        <label for="week_in_day" 
                         class=" text-[15px]
                         ">
                         Day:
                         </label>
-                        <input type="text" name="section_name" id="section_name" placeholder="M/TH/W/T/F/SAT"
+                        <input type="text" name="week_in_day" id="week_in_day" placeholder="M/TH/W/T/F/SAT"
                         class="w-36 rounded-md text-[13.5px]
                         ">
-                        <br class="m-5">
 
                         <div class="text-center mt-5">
                         <input type="submit" value="Submit" 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_06_102457) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_10_154834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -23,6 +23,28 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_06_102457) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.string "day_of_week"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "subject"
+    t.string "section_name"
+  end
+
+  create_table "section_students", force: :cascade do |t|
+    t.string "name"
+    t.string "section_name"
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "section_name"
+    t.string "grade_lvl"
+    t.string "advisor"
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["section_name"], name: "index_sections_on_section_name", unique: true
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "email"
     t.string "e_address"
@@ -31,6 +53,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_06_102457) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "birth"
+  end
+
+  create_table "subject_teachers", force: :cascade do |t|
+    t.string "name"
+    t.string "subject"
+    t.string "section_name"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "subject_name"
+    t.string "section_name"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -43,4 +76,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_06_102457) do
     t.date "birth"
   end
 
+  add_foreign_key "schedules", "sections", column: "section_name", primary_key: "section_name"
+  add_foreign_key "section_students", "sections", column: "section_name", primary_key: "section_name"
+  add_foreign_key "subject_teachers", "sections", column: "section_name", primary_key: "section_name"
+  add_foreign_key "subjects", "sections", column: "section_name", primary_key: "section_name"
 end

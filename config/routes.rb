@@ -39,6 +39,10 @@ Rails.application.routes.draw do
   post "/teacher/log", to: "pages#account_verify", as:"teacher_log", account_type: "teacher"
   post "/admin/log", to: "pages#account_verify", as:"admin_log", account_type: "admin"
   post "/admin/create/info", to: "pages#create_student_teacher", as: "admin_insert_info"
+  post "/admin/create/section", to: "pages#add_section", as:"add_section"
+  post "/admin/assign/teacher", to: "pages#add_subject_teacher", as: "add_subject_teacher"
+  post "/admin/assign/student", to: "pages#add_student", as: "add_student"
+  post "/admin/create/schedules",to: "pages#add_schedule", as: "add_schedule"
   root "pages#login_check", as: "account_check"
 
 

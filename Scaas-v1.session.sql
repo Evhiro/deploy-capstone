@@ -1,1 +1,6 @@
-SELECT password_digest FROM logins WHERE password_digest = 'desired_p';
+INSERT INTO subjects(subjects_name)
+VALUES ("English"),
+("Math"),
+("Filipino"),
+("Science"),
+("A.P."),

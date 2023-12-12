@@ -31,6 +31,10 @@ class PagesController < ApplicationController
         render "pages/Admin/_settings"
     end
     def create_section
+      @section = Section.all
+      @teacher = Teacher.all
+      @student = Student.all
+      @subject = Subject.all
       render "pages/Admin/_createsection"
     end
     def view_section
@@ -81,6 +85,78 @@ class PagesController < ApplicationController
     end
 
         #LOGIN COMMANDS
+        def add_section
+          secret_key = Rails.application.credentials.secret_key_base
+          obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+          grade_lvl = params[:grade_lvl]
+          section_name = params[:section_name]
+          advisor_name = params[:advisor_name]
+
+          Section.create(
+            grade_lvl: grade_lvl,
+            section_name: section_name,
+            advisor: advisor_name
+          )
+
+          redirect_to create_section_path(email: obfuscated_email)
+
+        end
+
+        def add_subject_teacher
+          secret_key = Rails.application.credentials.secret_key_base
+          obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+          section_name = params[:section_name]
+          teacher_name = params[:sub_teacher]
+          subject_name = params[:subject_name]
+        
+          SubjectTeacher.create(
+            name: teacher_name,
+            section_name: section_name,
+            subject: subject_name
+          )
+
+          redirect_to create_section_path(email: obfuscated_email)
+        end
+
+        def add_student
+          secret_key = Rails.application.credentials.secret_key_base
+          obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+          section = params[:section_name]
+          enrolee = params[:student_name]
+
+          SectionStudent.create(
+            name: enrolee,
+            section_name: section
+          )
+          redirect_to create_section_path(email: obfuscated_email)
+        end
+
+        def add_schedule
+          secret_key = Rails.application.credentials.secret_key_base
+          obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+          section = params[:section_name]
+          subject = params[:subject_name]
+          time_in = params[:time_in]
+          time_out = params[:time_out]
+          am_pm_one = params[:time_one]
+          am_pm_two = params[:time_two]
+          week_in_day = params[:week_in_day]
+
+          final_time_in = "#{time_in.gsub(' ', '')}#{am_pm_one.upcase}"
+          final_time_out = "#{time_out.gsub(' ', '')}#{am_pm_two.upcase}"
+
+          Schedule.create(
+            section_name: section,
+            subject: subject,
+            start_time: final_time_in,
+            end_time: final_time_out,
+            day_of_week: week_in_day
+          )
+
+          redirect_to create_section_path(email: obfuscated_email)
+        end
+
+
         def create_student_teacher
             lname = params[:lname]
             fname = params[:fname]
@@ -188,7 +264,6 @@ class PagesController < ApplicationController
           @current_person ||= current_user.student || current_user.teacher
         end
       end
-      
       
       def logged_in?
         !current_user.nil?
