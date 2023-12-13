@@ -1,4 +1,3 @@
 class SectionStudent < ApplicationRecord
-  belongs_to :login, foreign_key: 'name', primary_key: 'name', class_name: 'Student'
-  belongs_to :section
+  belongs_to :section, foreign_key: 'section_name', primary_key: 'section_name'
 end
