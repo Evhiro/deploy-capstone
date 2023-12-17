@@ -53,6 +53,7 @@ class PagesController < ApplicationController
       @teacher = Teacher.all
       @student = Student.all
       @subject = Subject.all
+      @sched = SubjectTeacherSection.all
       render "pages/Admin/_createsection"
     end
     def view_section
@@ -189,17 +190,27 @@ class PagesController < ApplicationController
           am_pm_one = params[:time_one]
           am_pm_two = params[:time_two]
           week_in_day = params[:week_in_day]
+          sub_teacher = Subject.find_by(subject_name: subject)
+          section_teacher = Section.find_by(section_name: section)
+
+          schedule = SubjectTeacherSection.find_by(subject_id: sub_teacher.subject_id, section_id: section_teacher.section_id)
 
           final_time_in = "#{time_in.gsub(' ', '')}#{am_pm_one.upcase}"
           final_time_out = "#{time_out.gsub(' ', '')}#{am_pm_two.upcase}"
 
+          generator = UniqueIntegerGenerator.new(1000..9999)
+          id = generator.generate_unique_integer
+          
           Schedule.create(
-            section_name: section,
-            subject: subject,
-            start_time: final_time_in,
-            end_time: final_time_out,
+            schedule_id: id,
+            time_in: final_time_in,
+            time_out: final_time_out,
             day_of_week: week_in_day
           )
+          schedule.update(
+            schedule_id: id
+          )
+          
 
           redirect_to create_section_path(email: obfuscated_email)
         end

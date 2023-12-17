@@ -202,8 +202,8 @@
                         <select name="subject_name" id="subject_name" 
                         class="text-[12px] w-30 rounded-md
                         ">
-                        <% @subject.each do |subject| %>
-                        <option value="<%= subject.subject_name %>"><%= subject.subject_name %></option>
+                        <% @sched.each do |sched| %>
+                        <option value="<%= sched.subject.subject_name %>"><%= sched.subject.subject_name %></option>
                         <% end %>
                         </select>
                         <br class="m-5">

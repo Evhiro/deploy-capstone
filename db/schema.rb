@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_17_143531) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_17_172424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -31,6 +31,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_143531) do
     t.string "title"
     t.text "content"
     t.string "anounced_time"
+  end
+
+  create_table "schedules", primary_key: "schedule_id", force: :cascade do |t|
+    t.string "time_in"
+    t.string "time_out"
+    t.string "day_of_week"
   end
 
   create_table "sections", primary_key: "section_id", force: :cascade do |t|
@@ -59,6 +65,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_143531) do
     t.bigint "teacher_id"
     t.bigint "section_id"
     t.bigint "subject_id"
+    t.bigint "schedule_id"
+    t.index ["schedule_id"], name: "index_subject_teacher_sections_on_schedule_id"
     t.index ["section_id"], name: "index_subject_teacher_sections_on_section_id"
     t.index ["subject_id"], name: "index_subject_teacher_sections_on_subject_id"
     t.index ["teacher_id"], name: "index_subject_teacher_sections_on_teacher_id"
@@ -90,6 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_143531) do
   add_foreign_key "sections", "teachers", primary_key: "teacher_id"
   add_foreign_key "students", "sections", primary_key: "section_id"
   add_foreign_key "students", "users", primary_key: "user_id"
+  add_foreign_key "subject_teacher_sections", "schedules", primary_key: "schedule_id"
   add_foreign_key "subject_teacher_sections", "sections", primary_key: "section_id"
   add_foreign_key "subject_teacher_sections", "subjects", primary_key: "subject_id"
   add_foreign_key "subject_teacher_sections", "teachers", primary_key: "teacher_id"

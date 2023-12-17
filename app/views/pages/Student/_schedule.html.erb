@@ -47,21 +47,17 @@
                         <thead class="border border-solid border-black text-[14px] md:text-2xl text-green-500">
                             <td class="border border-solid border-black">SUBJECT</td>
                             <td class="border border-solid border-black">TEACHER</td>
-                            <td class="border border-solid border-black">P1</td>
-                            <td class="border border-solid border-black">P2</td>
-                            <td class="border border-solid border-black">P3</td>
-                            <td class="border border-solid border-black">AVE.</td>
-                            <td class="border border-solid border-black">RESULT</td>
+                            <td class="border border-solid border-black">Time-in</td>
+                            <td class="border border-solid border-black">Time-out</td>
+                            <td class="border border-solid border-black">Day-of-Week</td>
                         </thead>
-                       <% @schedule.each do |schedule|%>
+                       <% @schedule.each do |t|%>
                         <tbody class="border border-solid border-black text-[12px]">
-                            <td class="border border-solid border-black"> <%= schedule.subject.subject_name %> </td>
-                            <td class="border border-solid border-black"><%= "#{schedule.teacher.fname} #{schedule.teacher.lname}" %></td>
-                            <td class="border border-solid border-black">95</td>
-                            <td class="border border-solid border-black">94</td>
-                            <td class="border border-solid border-black">96</td>
-                            <td class="border border-solid border-black">95.0</td>
-                            <td class="border border-solid border-black">PASSED</td>
+                            <td class="border border-solid border-black"> <%= t.subject.subject_name %> </td>
+                            <td class="border border-solid border-black"><%= "#{t.teacher.fname} #{t.teacher.lname}" %></td>
+                            <td class="border border-solid border-black"><%= t.schedule&.time_in %></td>
+                            <td class="border border-solid border-black"><%= t.schedule&.time_out %></td>
+                            <td class="border border-solid border-black"><%= t.schedule&.day_of_week %></td>
                         </tbody>
                          <% end %>
                     </table>
