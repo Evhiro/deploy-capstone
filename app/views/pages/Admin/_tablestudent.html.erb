@@ -27,7 +27,8 @@
                               <% students_slice.each do |student| %>
                                 <div class="border border-black border-solid rounded-md mb-4 ml-2">
                                   <p class="border-b shadow p-2"><span class="text-green-500">Name:</span> <%= "#{student.fname} #{student.lname}" %></p>
-                                  <p class="p-2"><span class="text-green-500">Email:</span> <%= student.email %></p>
+                                  <p class="p-2"><span class="text-green-500">Email:</span> <%= student.user.email %></p>
+                                  <%= button_to "Delete", '#', data: { confirm: "Are you sure?" }, class: "text-red-500 ml-2" %>
                                 </div>
                               <% end %>
                             </div>

@@ -1,3 +1,4 @@
 class Student < ApplicationRecord
-    has_one :login, foreign_key: 'email', primary_key: 'email'
+    belongs_to :user, foreign_key: 'user_id'
+    belongs_to :section, foreign_key: 'section_id'
 end

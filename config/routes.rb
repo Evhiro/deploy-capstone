@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   post "/admin/assign/teacher", to: "pages#add_subject_teacher", as: "add_subject_teacher"
   post "/admin/assign/student", to: "pages#add_student", as: "add_student"
   post "/admin/create/schedules",to: "pages#add_schedule", as: "add_schedule"
+  post "/admin/add/announcement", to: "pages#add_announce", as: "add_announce"
   root "pages#login_check", as: "account_check"
 
 

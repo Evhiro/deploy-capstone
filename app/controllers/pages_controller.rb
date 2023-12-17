@@ -4,6 +4,24 @@ class PagesController < ApplicationController
     before_action :authenticate_teacher!, only: [:teacher_dashboard, :teacher_announcement, :teacher_grades, :teacher_schedule, :teacher_settings]
     before_action :authenticate_student!, only: [:student_dashboard, :student_announcement, :student_grades, :student_schedule,:student_settings]
 
+    class UniqueIntegerGenerator
+      def initialize(range)
+        @range = range
+        @generated_numbers = Set.new
+      end
+    
+      def generate_unique_integer
+        begin
+          candidate = rand(@range)
+        end while @generated_numbers.include?(candidate)
+    
+        @generated_numbers.add(candidate)
+        candidate
+      end
+    end
+
+
+
     def landing
         render "pages/_landing"
     end
@@ -24,7 +42,7 @@ class PagesController < ApplicationController
         render "pages/Admin/_tableteacher"
     end
     def admin_accounts
-        @logins = Login.all
+        @logins = User.all
         render "pages/Admin/_accounts"
     end
     def admin_settings
@@ -55,12 +73,17 @@ class PagesController < ApplicationController
       render "pages/Student/_settings"
     end
     def student_announcement
+      @announce = AnnouncementBoard.all
       render "pages/Student/_announcement"
     end
     def student_grades
+      @student = Student.all
+      @schedule = SubjectTeacherSection.all
       render "pages/Student/_grades"
     end
     def student_schedule
+      @student = Student.all
+      @schedule = SubjectTeacherSection.all
       render "pages/Student/_schedule"
     end
 
@@ -91,11 +114,17 @@ class PagesController < ApplicationController
           grade_lvl = params[:grade_lvl]
           section_name = params[:section_name]
           advisor_name = params[:advisor_name]
+          name_parts = advisor_name.split
+          first_name = name_parts.first
+          teacher = Teacher.find_by(fname: first_name)
+          generator = UniqueIntegerGenerator.new(1000..9999)
+          section_id = generator.generate_unique_integer 
 
           Section.create(
+            section_id: section_id,
             grade_lvl: grade_lvl,
             section_name: section_name,
-            advisor: advisor_name
+            teacher_id: teacher.teacher_id
           )
 
           redirect_to create_section_path(email: obfuscated_email)
@@ -106,13 +135,25 @@ class PagesController < ApplicationController
           secret_key = Rails.application.credentials.secret_key_base
           obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
           section_name = params[:section_name]
+          section = Section.find_by(section_name: section_name)
+          
           teacher_name = params[:sub_teacher]
+          name_parts = teacher_name.split
+          last_name = name_parts.last
+          teacher = Teacher.find_by(lname: last_name)
+
           subject_name = params[:subject_name]
+          subject = Subject.find_by(subject_name: subject_name)
+
+          generator = UniqueIntegerGenerator.new(1000..9999)
+          id = generator.generate_unique_integer
+
         
-          SubjectTeacher.create(
-            name: teacher_name,
-            section_name: section_name,
-            subject: subject_name
+          SubjectTeacherSection.create(
+            subject_teacher_sections_id: id,
+            section_id: section.section_id,
+            subject_id: subject.subject_id,
+            teacher_id: teacher.teacher_id
           )
 
           redirect_to create_section_path(email: obfuscated_email)
@@ -121,13 +162,20 @@ class PagesController < ApplicationController
         def add_student
           secret_key = Rails.application.credentials.secret_key_base
           obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
-          section = params[:section_name]
+          section_name = params[:section_name]
           enrolee = params[:student_name]
+          name_parts = enrolee.split
+          first_name = name_parts.first
+          last_name = name_parts.last
+        
+          student = Student.find_by(fname: first_name)
+        
+          section = Section.find_by(section_name: section_name)
 
-          SectionStudent.create(
-            name: enrolee,
-            section_name: section
-          )
+          if student && section
+            student.update!(section_id: section.id)
+          end
+
           redirect_to create_section_path(email: obfuscated_email)
         end
 
@@ -156,6 +204,24 @@ class PagesController < ApplicationController
           redirect_to create_section_path(email: obfuscated_email)
         end
 
+        def add_announce
+          secret_key = Rails.application.credentials.secret_key_base
+          obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+          title = params[:title]
+          content = params[:desc]
+          
+          announce = AnnouncementBoard.find_by(announcement_board_id: 1)
+
+          #if announce
+          announce.update!(
+            title: title,
+            content: content,
+            anounced_time: Time.current
+          )
+          #end
+
+          redirect_to admin_announcement_path(email: obfuscated_email)
+        end
 
         def create_student_teacher
             lname = params[:lname]
@@ -163,18 +229,21 @@ class PagesController < ApplicationController
             birth = params[:birth]
             e_address = params[:e_address]
             account_type = params[:account_type]
+            generator = UniqueIntegerGenerator.new(1000..9999)
+            user_id = generator.generate_unique_integer
+            id = generator.generate_unique_integer
 
             email = "#{lname.downcase.gsub(' ', '')}.#{fname.downcase.gsub(' ', '')}"
             password = birth
 
             hashed_password = BCrypt::Password.create(password)
 
-            Login.create(email: email, password_digest: hashed_password, account_type: account_type.downcase)
+            User.create(user_id: user_id, email: email, password_digest: hashed_password, account_type: account_type.downcase)
 
             if account_type == "student"
-              Student.create(email: email, e_address: e_address, fname: fname, lname: lname, birth: birth)
+              Student.create(student_id: id,e_address: e_address, fname: fname, lname: lname, bday: birth, age: 1 , user_id: user_id)
             elsif account_type == "teacher"
-              Teacher.create(email: email,e_address: e_address, fname: fname, lname: lname, birth: birth)
+              Teacher.create(teacher_id: id,e_address: e_address, fname: fname, lname: lname, bday: birth, age: 1 , user_id: user_id)
             end
 
             secret_key = Rails.application.credentials.secret_key_base
@@ -183,10 +252,10 @@ class PagesController < ApplicationController
         end
     
         def account_verify
-            user = Login.find_by(email: params[:email])
+            user = User.find_by(email: params[:email])
         
             if user && user.authenticate(params[:password]) && user.account_type == params[:account_type]
-              session[:user_id] = user.id
+              session[:user_id] = user.user_id
               secret_key = Rails.application.credentials.secret_key_base
               obfuscated_email = Digest::SHA256.hexdigest("#{user.email}-#{secret_key}")
         
@@ -256,7 +325,7 @@ class PagesController < ApplicationController
       private
       
       def current_user
-        @current_user ||= Login.find_by(id: session[:user_id]) if session[:user_id]
+        @current_user ||= User.find_by(user_id: session[:user_id]) if session[:user_id]
       end
       
       def current_person

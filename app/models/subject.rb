@@ -1,3 +1,3 @@
 class Subject < ApplicationRecord
-    belongs_to :section, primary_key: "section_name", foreign_key: "section_name"
+    has_many :subject_teacher_section, foreign_key: "subject_id"
 end

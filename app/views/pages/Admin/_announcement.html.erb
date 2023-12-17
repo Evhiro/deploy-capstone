@@ -21,27 +21,16 @@
                         </p>
                     </div>
                     <div class="md:flex">
-                         <form action="" method="POST" class="p-3 md:text-center">
+                         <form action="<%= add_announce_path %>" method="POST" class="p-3 md:text-center">
 
-                         <label for="lname"
+                         <label for="title"
                          class="text-green-500 text-[15px]
                          "> 
                          Title:
                          </label>
-                         <input type="text" type="lname" name="lname" id="lname" 
+                         <input type="text" type="title" name="title" id="lname" 
                          class="w-46 rounded-md text-[12px]
                          "
-                         required>
-                         <br class="m-5">
-
-                         <label for="date"
-                         class="text-green-500 text-[15px]
-                         "> 
-                         Date:
-                         </label>
-                         <input type="date" type="date" name="date" id="date" 
-                         class="w-46 rounded-md text-[12px] ml-4
-                         " 
                          required>
                          <br class="m-5">
 

@@ -17,10 +17,18 @@
                 "
                 >SCHOOL ANNONCEMENT
                 </p>
-                <p class="text-bold 
-                "
-                >TESTING FOR THE ANNOUNCEMENT
-                </p>
+                
+                <div>
+                    <% @announce.each do |announce| %>
+
+                    <div class=" text-bold shadow-md mb-6">
+                    <p><span class="text-red-500">TITLE -></span> <%= announce.title %> <span class="text-red-500"><- TITLE</span> </p>
+                    <p><span class="text-red-500">TIME -></span> <%= announce.anounced_time %> <span class="text-red-500"><- TIME</span> </p>
+                    </div>
+                    <p> <%= announce.content %> </p>
+
+                    <% end %>
+                </div>
                 </div>
             </div>
         </div>

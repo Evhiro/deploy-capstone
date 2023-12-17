@@ -105,8 +105,9 @@
                             >ACCOUNT INFO
                             </p>  
 
-                            <p class="border-b shadow p-1"><span class="text-green-500">Email:</span> <%= login.email %></p>
-                            <p class="p-1"><span class="text-green-500">Account Type:</span> <%= login.account_type %></p>
+                            <p class="border-b shadow p-2"><span class="text-green-500">Email:</span> <%= login.email %></p>
+                            <p class="p-2"><span class="text-green-500">Account Type:</span> <%= login.account_type %></p>
+                            <%= button_to "Delete", '#', data: { confirm: "Are you sure?" }, class: "text-red-500 ml-2" %>
                           </div>
                         <% end %>
                       </div>

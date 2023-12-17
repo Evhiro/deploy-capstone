@@ -1,3 +1,4 @@
 class Teacher < ApplicationRecord
-    has_one :login, foreign_key: 'email', primary_key: 'email'
+    belongs_to :user, foreign_key: 'user_id'
+    has_many :subject_teacher_section, foreign_key: 'teacher_id'
 end

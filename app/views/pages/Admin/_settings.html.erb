@@ -22,10 +22,7 @@
                     </div>
 
                     <div>
-                        <p>Current Email: @<%= current_user.email %></p>
-                        <p>Name: <%= "#{current_person&.fname} #{current_person&.lname}" %></p>
-                        <p>Birthday: <%= current_person&.birth&.strftime('%B %e, %Y') %> </</p>
-                        <p>Address: <%= current_person&.e_address %></</p>
+                        <p>Current Email: <%= current_user.email %></p>
                     </div>
 
                     <div class="text-center">

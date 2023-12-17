@@ -1,0 +1,2 @@
+class AnnouncementBoard < ApplicationRecord
+end
