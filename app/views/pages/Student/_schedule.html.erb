@@ -27,12 +27,12 @@
 
                     <p class="text-bold text-right text-sm 
                     "
-                    ><span class="text-md text-green-500 text-bold">SECTION:</span>  <%= current_person.section.section_name %> 
+                    ><span class="text-md text-green-500 text-bold">SECTION:</span>  <%= current_person.section&.section_name %> 
                     </p>
 
                     <p class="text-bold text-right text-sm 
                     "
-                    ><span class="text-md text-green-500 text-bold">GRADE:</span> <%= current_person.section.grade_lvl %>
+                    ><span class="text-md text-green-500 text-bold">GRADE:</span> <%= current_person.section&.grade_lvl %>
                     </p>
                 </div>
 
@@ -51,10 +51,15 @@
                             <td class="border border-solid border-black">Time-out</td>
                             <td class="border border-solid border-black">Day-of-Week</td>
                         </thead>
-                       <% @schedule.each do |t|%>
+                        <%
+                         @sections = current_person.section&.section_name
+                         @section = Section.find_by(section_name: @sections)
+                         @section_schedule = @schedule.where(section_id: @section&.section_id) 
+                        %>
+                       <% @section_schedule.each do |t| %>
                         <tbody class="border border-solid border-black text-[12px]">
-                            <td class="border border-solid border-black"> <%= t.subject.subject_name %> </td>
-                            <td class="border border-solid border-black"><%= "#{t.teacher.fname} #{t.teacher.lname}" %></td>
+                            <td class="border border-solid border-black"> <%= t.subject&.subject_name %> </td>
+                            <td class="border border-solid border-black"><%= "#{t.teacher&.fname} #{t.teacher.lname}" %></td>
                             <td class="border border-solid border-black"><%= t.schedule&.time_in %></td>
                             <td class="border border-solid border-black"><%= t.schedule&.time_out %></td>
                             <td class="border border-solid border-black"><%= t.schedule&.day_of_week %></td>

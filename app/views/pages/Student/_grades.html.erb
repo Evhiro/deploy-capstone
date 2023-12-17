@@ -27,12 +27,12 @@
 
                     <p class="text-bold text-right text-sm 
                     "
-                    ><span class="text-md text-green-500 text-bold">SECTION:</span>  <%= current_person.section.section_name %> 
+                    ><span class="text-md text-green-500 text-bold">SECTION:</span>  <%= current_person.section&.section_name %> 
                     </p>
 
                     <p class="text-bold text-right text-sm 
                     "
-                    ><span class="text-md text-green-500 text-bold">GRADE:</span> <%= current_person.section.grade_lvl %>
+                    ><span class="text-md text-green-500 text-bold">GRADE:</span> <%= current_person.section&.grade_lvl %>
                     </p>
                 </div>
                 <br>
@@ -54,8 +54,8 @@
                         </thead>
                        <% @schedule.each do |schedule| %>
                         <tbody class="border border-solid border-black text-[12px]">
-                            <td class="border border-solid border-black"> <%= schedule.subject.subject_name %> </td>
-                            <td class="border border-solid border-black"><%= "#{schedule.teacher.fname} #{schedule.teacher.lname}" %></td>
+                            <td class="border border-solid border-black"> <%= schedule.subject&.subject_name %> </td>
+                            <td class="border border-solid border-black"><%= "#{schedule.teacher&.fname} #{schedule.teacher&.lname}" %></td>
                             <td class="border border-solid border-black">95</td>
                             <td class="border border-solid border-black">94</td>
                             <td class="border border-solid border-black">96</td>

@@ -24,16 +24,9 @@
                     </p>
 
                     <br>
-                    <p class="text-md text-green-500 text-bold">SECTION</p>
-                    <select name="" id="">
-                    <option class="text-bold text-right text-sm 
-                    "
-                    >PAPAYA
-                    </option>
-                    </select>
                     <p class="text-bold text-right text-sm 
                     "
-                    ><span class="text-md text-green-500 text-bold">GRADE_LVL:</span> 9
+                    ><span class="text-md text-green-500 text-bold">ADVISORY:</span><% @advisor.each do |advisor| %> || <%= advisor.section_name %> <%= advisor.grade_lvl %> || <% end %>
                     </p>
 
                 </div>

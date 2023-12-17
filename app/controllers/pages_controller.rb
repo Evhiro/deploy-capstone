@@ -42,7 +42,7 @@ class PagesController < ApplicationController
         render "pages/Admin/_tableteacher"
     end
     def admin_accounts
-        @logins = User.all
+        @user = User.all
         render "pages/Admin/_accounts"
     end
     def admin_settings
@@ -99,12 +99,17 @@ class PagesController < ApplicationController
       render "pages/Teacher/_settings"
     end
     def teacher_announcement
+      @announce = AnnouncementBoard.all
       render "pages/Teacher/_announcement"
     end
     def teacher_grades
+      @schedule = SubjectTeacherSection.where(teacher_id: current_user.teacher.teacher_id)
+      @advisor = Section.where(teacher_id: current_user.teacher.teacher_id)
       render "pages/Teacher/_grades"
     end
     def teacher_schedule
+      @schedule = SubjectTeacherSection.where(teacher_id: current_user.teacher.teacher_id)
+      @advisor = Section.where(teacher_id: current_user.teacher.teacher_id)
       render "pages/Teacher/_schedule"
     end
 
@@ -251,10 +256,12 @@ class PagesController < ApplicationController
 
             User.create(user_id: user_id, email: email, password_digest: hashed_password, account_type: account_type.downcase)
 
+            #CANT INSERT RECORDS IN STUDENT
+            
             if account_type == "student"
-              Student.create(student_id: id,e_address: e_address, fname: fname, lname: lname, bday: birth, age: 1 , user_id: user_id)
+              Student.create(student_id: id, e_address: e_address, fname: fname, lname: lname, bday: birth, age: 1 , user_id: user_id)
             elsif account_type == "teacher"
-              Teacher.create(teacher_id: id,e_address: e_address, fname: fname, lname: lname, bday: birth, age: 1 , user_id: user_id)
+              Teacher.create(teacher_id: id, e_address: e_address, fname: fname, lname: lname, bday: birth, age: 1 , user_id: user_id)
             end
 
             secret_key = Rails.application.credentials.secret_key_base
@@ -312,7 +319,6 @@ class PagesController < ApplicationController
             end
           end
         
-        #NOT WORKING
         def change_password
           user = current_user
           if user && user.authenticate(params[:password])

@@ -25,7 +25,9 @@
                     <p><span class="text-red-500">TITLE -></span> <%= announce.title %> <span class="text-red-500"><- TITLE</span> </p>
                     <p><span class="text-red-500">TIME -></span> <%= announce.anounced_time %> <span class="text-red-500"><- TIME</span> </p>
                     </div>
-                    <p> <%= announce.content %> </p>
+                    <p class=" whitespace-pre-line text-center">
+                    <%= announce.content %>
+                    </p>
 
                     <% end %>
                 </div>

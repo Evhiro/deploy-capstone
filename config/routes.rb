@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  #FIX THIS
+
   patch '/change_password', to: "pages#change_password", as: "change_password"
 
 

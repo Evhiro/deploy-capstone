@@ -24,16 +24,9 @@
                     </p>
 
                     <br>
-                    <p class="text-md text-green-500 text-bold">SECTION</p>
-                    <select name="" id="">
-                    <option class="text-bold text-right text-sm 
-                    "
-                    >PAPAYA
-                    </option>
-                    </select>
                     <p class="text-bold text-right text-sm 
                     "
-                    ><span class="text-md text-green-500 text-bold">GRADE_LVL:</span> 9
+                    ><span class="text-md text-green-500 text-bold">ADVISORY:</span><% @advisor.each do |advisor| %> || <%= advisor.section_name %> <%= advisor.grade_lvl %> || <% end %>
                     </p>
 
                 </div>
@@ -41,56 +34,29 @@
                     <br>
                     <p class="text-green-500 text-bold text-xl shadow-md mb-6 
                     "
-                    >STUDENT SCHEDULE
+                    >TEACHER SCHEDULE
                     </p>
 
                 <div class="flex justify-center mt-7 mb-10">
                     <table class="border border-solid border-black p-2">
                         <thead class="border border-solid border-black text-[14px] md:text-2xl text-green-500">
                             <td class="border border-solid border-black">SUBJECT</td>
-                            <td class="border border-solid border-black">TEACHER</td>
-                            <td class="border border-solid border-black">P1</td>
-                            <td class="border border-solid border-black">P2</td>
-                            <td class="border border-solid border-black">P3</td>
-                            <td class="border border-solid border-black">AVE.</td>
-                            <td class="border border-solid border-black">RESULT</td>
+                            <td class="border border-solid border-black">SECTION</td>
+                            <td class="border border-solid border-black">GRADE_LVL</td>
+                            <td class="border border-solid border-black">TIME-IN</td>
+                            <td class="border border-solid border-black">TIME-OUT</td>
+                            <td class="border border-solid border-black">DAY-OF-WEEK</td>
                         </thead>
+                       <% @schedule.each do |t|%>
                         <tbody class="border border-solid border-black text-[12px]">
-                            <td class="border border-solid border-black">ENGLISH</td>
-                            <td class="border border-solid border-black">MR.NOBODY</td>
-                            <td class="border border-solid border-black">95</td>
-                            <td class="border border-solid border-black">94</td>
-                            <td class="border border-solid border-black">96</td>
-                            <td class="border border-solid border-black">95.0</td>
-                            <td class="border border-solid border-black">PASSED</td>
+                            <td class="border border-solid border-black"> <%= t.subject&.subject_name %> </td>
+                            <td class="border border-solid border-black"><%= t.section&.section_name %></td>
+                            <td class="border border-solid border-black"><%= t.section&.grade_lvl %></td>
+                            <td class="border border-solid border-black"><%= t.schedule&.time_in %></td>
+                            <td class="border border-solid border-black"><%= t.schedule&.time_out %></td>
+                            <td class="border border-solid border-black"><%= t.schedule&.day_of_week %></td>
                         </tbody>
-                        <tbody class="border border-solid border-black text-[12px]">
-                            <td class="border border-solid border-black">ENGLISH</td>
-                            <td class="border border-solid border-black">MR.NOBODY</td>
-                            <td class="border border-solid border-black">95</td>
-                            <td class="border border-solid border-black">94</td>
-                            <td class="border border-solid border-black">96</td>
-                            <td class="border border-solid border-black">95.0</td>
-                            <td class="border border-solid border-black">PASSED</td>
-                        </tbody>
-                            <tbody class="border border-solid border-black text-[12px]">
-                            <td class="border border-solid border-black">ENGLISH</td>
-                            <td class="border border-solid border-black">MR.NOBODY</td>
-                            <td class="border border-solid border-black">95</td>
-                            <td class="border border-solid border-black">94</td>
-                            <td class="border border-solid border-black">96</td>
-                            <td class="border border-solid border-black">95.0</td>
-                            <td class="border border-solid border-black">PASSED</td>
-                        </tbody>
-                            <tbody class="border border-solid border-black text-[12px]">
-                            <td class="border border-solid border-black">ENGLISH</td>
-                            <td class="border border-solid border-black">MR.NOBODY</td>
-                            <td class="border border-solid border-black">95</td>
-                            <td class="border border-solid border-black">94</td>
-                            <td class="border border-solid border-black">96</td>
-                            <td class="border border-solid border-black">95.0</td>
-                            <td class="border border-solid border-black">PASSED</td>
-                        </tbody>
+                         <% end %>
                     </table>
                     </div>
                 </div>
