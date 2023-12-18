@@ -1,9 +1,10 @@
 class PagesController < ApplicationController
     before_action :require_login, except: [:landing, :getstarted, :admin, :student, :teacher, :login_check, :account_verify]
-    before_action :authenticate_admin!, only: [:student_table, :teacher_table, :admin_announcement, :admin_accounts, :admin_settings]
+    before_action :authenticate_admin!, only: [:student_table, :teacher_table, :admin_announcement, :admin_accounts, :admin_settings, :create_section]
     before_action :authenticate_teacher!, only: [:teacher_dashboard, :teacher_announcement, :teacher_grades, :teacher_schedule, :teacher_settings]
     before_action :authenticate_student!, only: [:student_dashboard, :student_announcement, :student_grades, :student_schedule,:student_settings]
-
+    before_action :not_logged, only: [:landing, :admin, :student, :teacher]
+    
     class UniqueIntegerGenerator
       def initialize(range)
         @range = range
@@ -19,7 +20,6 @@ class PagesController < ApplicationController
         candidate
       end
     end
-
 
 
     def landing
@@ -80,6 +80,7 @@ class PagesController < ApplicationController
     def student_grades
       @student = Student.all
       @schedule = SubjectTeacherSection.all
+      @grade = StudentGrade.all
       render "pages/Student/_grades"
     end
     def student_schedule
@@ -292,7 +293,22 @@ class PagesController < ApplicationController
               redirect_to landing_path
             end
           end
-        
+
+          def not_logged
+            if logged_in?
+              secret_key = Rails.application.credentials.secret_key_base
+              obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+              case current_user.account_type
+              when "admin"
+                redirect_to student_table_path(email: obfuscated_email)
+              when "student"
+                redirect_to student_dashboard_path(email: obfuscated_email)
+              when "teacher"
+                redirect_to teacher_dashboard_path(email: obfuscated_email)
+              end
+            end
+          end
+
           def login_check
             if logged_in?
               secret_key = Rails.application.credentials.secret_key_base

@@ -49,18 +49,20 @@
                             <td class="border border-solid border-black">P1</td>
                             <td class="border border-solid border-black">P2</td>
                             <td class="border border-solid border-black">P3</td>
+                            <td class="border border-solid border-black">P4</td>
                             <td class="border border-solid border-black">AVE.</td>
                             <td class="border border-solid border-black">RESULT</td>
                         </thead>
-                       <% @schedule.each do |schedule| %>
+                       <% @schedule.zip(@grade).each do |schedule, grade| %>
                         <tbody class="border border-solid border-black text-[12px]">
                             <td class="border border-solid border-black"> <%= schedule.subject&.subject_name %> </td>
                             <td class="border border-solid border-black"><%= "#{schedule.teacher&.fname} #{schedule.teacher&.lname}" %></td>
-                            <td class="border border-solid border-black">95</td>
-                            <td class="border border-solid border-black">94</td>
-                            <td class="border border-solid border-black">96</td>
-                            <td class="border border-solid border-black">95.0</td>
-                            <td class="border border-solid border-black">PASSED</td>
+                            <td class="border border-solid border-black"><%= grade&.first_grading %></td>
+                            <td class="border border-solid border-black"><%= grade&.second_grading %></td>
+                            <td class="border border-solid border-black"><%= grade&.third_grading %></td>
+                            <td class="border border-solid border-black"><%= grade&.fourth_grading %></td>
+                            <td class="border border-solid border-black"> </td>
+                            <td class="border border-solid border-black"> </td>
                         </tbody>
                          <% end %>
                     </table>
