@@ -47,16 +47,18 @@
                             <td class="border border-solid border-black">P3</td>
                             <td class="border border-solid border-black">AVE.</td>
                             <td class="border border-solid border-black">RESULT</td>
-                        </thead>
+                        </thead>  
+                        <% @grade.each do |grade| %>
                         <tbody class="border border-solid border-black text-[12px]">
-                            <td class="border border-solid border-black">ENGLISH</td>
-                            <td class="border border-solid border-black">De Gracia, Troy Cortez</td>
+                            <td class="border border-solid border-black"><%= grade.subject&.subject_name %></td>
+                            <td class="border border-solid border-black"><%= "#{grade.student&.lname} #{grade.student&.fname}" %></td>
                             <td class="border border-solid border-black"><input type="text" maxlength="4" class="w-[53px] text-[12px]"></td>
                             <td class="border border-solid border-black"><input type="text" maxlength="4" class="w-[53px] text-[12px]"></td>
                             <td class="border border-solid border-black"><input type="text" maxlength="4" class="w-[53px] text-[12px]"></td>
                             <td class="border border-solid border-black">N/A</td>
                             <td class="border border-solid border-black">N/A</td>
                         </tbody>
+                        <% end %>
                     </table>
                 </div>
                 <input type="submit" value="Update" class="mb-5 bg-green-900 w-20 h-10 text-white text-bold border hover:cursor-pointer">

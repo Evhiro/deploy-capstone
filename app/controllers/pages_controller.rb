@@ -106,6 +106,7 @@ class PagesController < ApplicationController
     def teacher_grades
       @schedule = SubjectTeacherSection.where(teacher_id: current_user.teacher.teacher_id)
       @advisor = Section.where(teacher_id: current_user.teacher.teacher_id)
+      @grade = StudentGrade.where(teacher_id: current_user.teacher.teacher_id)
       render "pages/Teacher/_grades"
     end
     def teacher_schedule
@@ -162,6 +163,20 @@ class PagesController < ApplicationController
             subject_id: subject.subject_id,
             teacher_id: teacher.teacher_id
           )
+          
+          @student_get = Student.where(section_id: section.section_id)
+
+          @student_get.each do |get|
+
+          StudentGrade.create( 
+            student_grade_id: generator.generate_unique_integer,
+            section_id: section.section_id,
+            student_id: get.student_id,
+            subject_id: subject.subject_id,
+            teacher_id: teacher.teacher_id
+          )
+
+          end
 
           redirect_to create_section_path(email: obfuscated_email)
         end
@@ -257,7 +272,6 @@ class PagesController < ApplicationController
 
             User.create(user_id: user_id, email: email, password_digest: hashed_password, account_type: account_type.downcase)
 
-            #CANT INSERT RECORDS IN STUDENT
             
             if account_type == "student"
               Student.create(student_id: id, e_address: e_address, fname: fname, lname: lname, bday: birth, age: 1 , user_id: user_id)

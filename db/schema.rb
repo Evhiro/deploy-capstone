@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_17_235126) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_18_055944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -55,9 +55,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_235126) do
     t.bigint "section_id"
     t.bigint "subject_id"
     t.bigint "student_id"
+    t.float "average"
+    t.string "result"
+    t.bigint "teacher_id"
     t.index ["section_id"], name: "index_student_grades_on_section_id"
     t.index ["student_id"], name: "index_student_grades_on_student_id"
     t.index ["subject_id"], name: "index_student_grades_on_subject_id"
+    t.index ["teacher_id"], name: "index_student_grades_on_teacher_id"
   end
 
   create_table "students", primary_key: "student_id", force: :cascade do |t|
@@ -112,6 +116,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_235126) do
   add_foreign_key "student_grades", "sections", primary_key: "section_id"
   add_foreign_key "student_grades", "students", primary_key: "student_id"
   add_foreign_key "student_grades", "subjects", primary_key: "subject_id"
+  add_foreign_key "student_grades", "teachers", primary_key: "teacher_id"
   add_foreign_key "students", "sections", primary_key: "section_id"
   add_foreign_key "students", "users", primary_key: "user_id"
   add_foreign_key "subject_teacher_sections", "schedules", primary_key: "schedule_id"

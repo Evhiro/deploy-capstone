@@ -53,16 +53,24 @@
                             <td class="border border-solid border-black">AVE.</td>
                             <td class="border border-solid border-black">RESULT</td>
                         </thead>
-                       <% @schedule.zip(@grade).each do |schedule, grade| %>
+                        <%
+                         #GET SPECIFIC SUBJECT ON EACH SECTION
+                         @sections = current_person.section&.section_name
+                         @section = Section.find_by(section_name: @sections)
+                         @section_schedule = @schedule.where(section_id: @section&.section_id) 
+                         #GET SPECIFIC SECTION EVERY GRADES
+                         #later
+                        %>
+                       <% @section_schedule.zip(@grade).each do |schedule, grade| %>
                         <tbody class="border border-solid border-black text-[12px]">
                             <td class="border border-solid border-black"> <%= schedule.subject&.subject_name %> </td>
                             <td class="border border-solid border-black"><%= "#{schedule.teacher&.fname} #{schedule.teacher&.lname}" %></td>
-                            <td class="border border-solid border-black"><%= grade&.first_grading %></td>
-                            <td class="border border-solid border-black"><%= grade&.second_grading %></td>
-                            <td class="border border-solid border-black"><%= grade&.third_grading %></td>
-                            <td class="border border-solid border-black"><%= grade&.fourth_grading %></td>
-                            <td class="border border-solid border-black"> </td>
-                            <td class="border border-solid border-black"> </td>
+                            <td class="border border-solid border-black"> <%= grade&.first_grading %> </td>
+                            <td class="border border-solid border-black"> <%= grade&.second_grading %> </td>
+                            <td class="border border-solid border-black"> <%= grade&.third_grading %> </td>
+                            <td class="border border-solid border-black"> <%= grade&.fourth_grading %> </td>
+                            <td class="border border-solid border-black"> <%= grade&.average %> </td>
+                            <td class="border border-solid border-black"> <%= grade&.result %> </td>
                         </tbody>
                          <% end %>
                     </table>
