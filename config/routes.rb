@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  post 'teacher/student-grading', to: "pages#grading_student", as: "student_grading"
   patch '/change_password', to: "pages#change_password", as: "change_password"
 
 

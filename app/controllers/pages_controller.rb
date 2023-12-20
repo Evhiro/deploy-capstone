@@ -107,6 +107,7 @@ class PagesController < ApplicationController
       @schedule = SubjectTeacherSection.where(teacher_id: current_user.teacher.teacher_id)
       @advisor = Section.where(teacher_id: current_user.teacher.teacher_id)
       @grade = StudentGrade.where(teacher_id: current_user.teacher.teacher_id)
+      @sub = Subject.all
       render "pages/Teacher/_grades"
     end
     def teacher_schedule
@@ -114,6 +115,47 @@ class PagesController < ApplicationController
       @advisor = Section.where(teacher_id: current_user.teacher.teacher_id)
       render "pages/Teacher/_schedule"
     end
+
+    def grading_student
+      secret_key = Rails.application.credentials.secret_key_base
+      obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+      subject = Subject.find_by(subject_name: params[:subject])
+      student = Student.find_by(lname: params[:student_name])
+      p1 = params[:first_grading]
+      p2 = params[:second_grading]
+      p3 = params[:third_grading]
+      p4 = params[:fourth_grading]
+
+      grading = StudentGrade.find_by(subject_id: subject.subject_id, student_id: student.student_id)
+
+      grading.update(
+        first_grading: p1,
+        second_grading: p2,
+        third_grading: p3,
+        fourth_grading: p4
+      )
+    
+    if p1.present? && p2.present? && p3.present? && p4.present?
+      ave = (p1.to_f + p2.to_f + p3.to_f + p4.to_f) / 2
+      grading.update(
+        average: ave
+      )
+      if ave > 150
+        grading.update(
+          result: "PASSED"
+        )
+      else
+        grading.update(
+          result: "FAILED"
+        )
+      end
+
+    end
+    
+      redirect_to teacher_grades_path(email: obfuscated_email)
+    end
+    
+
 
         #LOGIN COMMANDS
         def add_section
