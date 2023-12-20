@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  delete 'admin/:email/remove_info', to: "pages#remove_info", as: "remove"
   post 'teacher/student-grading', to: "pages#grading_student", as: "student_grading"
   patch '/change_password', to: "pages#change_password", as: "change_password"
 

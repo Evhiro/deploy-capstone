@@ -155,9 +155,29 @@ class PagesController < ApplicationController
       redirect_to teacher_grades_path(email: obfuscated_email)
     end
     
+    def remove_info
+      secret_key = Rails.application.credentials.secret_key_base
+      obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+      put_account = params[:id]
 
+      account = User.find_by(user_id: put_account)
+      student_account = Student.find_by(user_id: put_account)
+      teacher_account = Teacher.find_by(user_id: put_account)
 
-        #LOGIN COMMANDS
+      if student_account.present?
+        student_account.destroy
+        account.destroy
+
+      elsif teacher_account.present?
+        teacher_account.destroy
+        account.destroy
+
+      else
+        redirect_to admin_accounts_path(email: obfuscated_email)
+      end
+        redirect_to admin_accounts_path(email: obfuscated_email)
+    end
+
         def add_section
           secret_key = Rails.application.credentials.secret_key_base
           obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")

@@ -104,10 +104,12 @@
                             "
                             >ACCOUNT INFO
                             </p>  
-
+                        <form action="<%= remove_path %>" method="delete">
                             <p class="border-b shadow p-2"><span class="text-green-500">Email:</span> <%= user.email %></p>
                             <p class="p-2"><span class="text-green-500">Account Type:</span> <%= user.account_type %></p>
-                            <%= button_to "Delete", '#', data: { confirm: "Are you sure?" }, class: "text-red-500 ml-2" %>
+                            <input type="hidden" name="id" value="<%= user.user_id %>">
+                            <input type="submit" value="Delete" class="text-red-500 p-3 border border-black m-2 hover:cursor-pointer">
+                        </form>
                           </div>
                         <% end %>
                       </div>
