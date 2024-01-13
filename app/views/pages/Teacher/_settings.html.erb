@@ -3,18 +3,18 @@
     <main class="flex">
         <nav id="menu" class="border-r-[1px] shadow-lg border-solid border-black-400 w-64 h-[90vh] hidden md:inline">
             <div class="text-gray-600 text-sm text-center p-3">MENU BAR --></div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500" aria-current="page"><%= link_to "Dashboard", teacher_dashboard_path %></div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Announcement", teacher_announcement_path %> </div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Schedule", teacher_schedule_path %> </div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500"><%= link_to "Grades", teacher_grades_path %> </div>
-            <div class="font-semibold p-2 bg-slate-100 border-l-4 border-green-500"><%= link_to "Settings", teacher_settings_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-blue-500" aria-current="page"><%= link_to "Dashboard", teacher_dashboard_path %></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-blue-500"><%= link_to "Announcement", teacher_announcement_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-blue-500"><%= link_to "Schedule", teacher_schedule_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-blue-500"><%= link_to "Grades", teacher_grades_path %> </div>
+            <div class="font-semibold p-2 bg-slate-100 border-l-4 text-blue-500 border-blue-500"><%= link_to "Settings", teacher_settings_path %> </div>
         </nav>
        <div>
             <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2"></div>
             <div class="md:border-[1px] md:border-solid md:border-black-500 h-96 md:m-5 mx-4 text-center">
                 <div class="shadow-md border-2 border-black mb-10">
                     <div class="text-center">
-                        <p class="text-green-500 text-bold text-xl shadow-md mb-6
+                        <p class="text-blue-500 text-bold text-xl shadow-md mb-6
                         "
                         >Profile
                         </p>
@@ -23,12 +23,12 @@
                     <div>
                         <p>Current Email: @<%= current_user.email %></p>
                         <p>Name: <%= "#{current_person&.fname} #{current_person&.lname}" %></p>
-                        <p>Birthday: <%= current_person&.birth&.strftime('%B %e, %Y') %> </</p>
+                        <p>Birthday: <%= current_person&.bday&.strftime('%B %e, %Y') %> </p>
                         <p>Address: <%= current_person&.e_address %></</p>
                     </div>
 
                     <div class="text-center">
-                        <p class="text-green-500 text-bold text-xl shadow-md mt-2
+                        <p class="text-blue-500 text-bold text-xl shadow-md mt-2
                         "
                         >CHANGE PASSWORD
                         </p>

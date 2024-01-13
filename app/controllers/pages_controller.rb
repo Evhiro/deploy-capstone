@@ -29,6 +29,10 @@ class PagesController < ApplicationController
       render "pages/_start"
     end
 
+    def test
+      render "pages/_create-section-modal"
+    end
+
     #ADMIN PAGES
     def admin
         render "pages/Admin/_login"

@@ -1,4 +1,4 @@
-<body class="flex flex-col items-center">
+<body class="flex flex-col items-center font-serif">
     <div class="text-center mt-24 mb-14 w-36
     md:w-40 md:mt-14">
         <%= image_tag('logo.png', alt: 'logo') %>
@@ -6,50 +6,50 @@
     <div class="text-center">
         <p 
         class="text-3xl text-center mb-10
-        md:text-4xl text-green-500">
+        md:text-4xl text-blue-500">
         Gen. Tinio National High School
         </p>
     </div>
     <div class="flex flex-col items-center h-60
     md:h-72 md:w-[600px] md:rounded-lg md:bg-white-200 md:order-black-500  md:border-2">
         <form action="<%= teacher_log_path %>" method="POST">
-            <h1 class="text-xl text-green-500 font-bold my-5 text-center
+            <h1 class="text-xl text-blue-500 font-bold my-5 text-center
             ">
             Teacher Login
             </h1>
 
             <label for="email"
-            class="text-green-500
+            class="text-blue-500
             "> 
             Email:
             </label>
             <br>
             <input type="text" type="email" name="email" id="email" 
-            class="
+            class="shadow rounded-lg focus:border-none focus:outline-none focus:ring focus:ring-blue-500
             " 
             required>
             <br>
 
             <label for="email"
-            class="text-green-500
+            class="text-blue-500
             "> 
             Password:
             </label>
             <br>
             <input type="password" type="password" name="password" id="password" 
-            class="
+            class="shadow rounded-lg focus:border-none focus:outline-none focus:ring focus:ring-blue-500
             " 
             required>
             <br>
             <div class="flex justify-between">
 
             <%= link_to "Back", landing_path,
-            class: "bg-green-500 border-[1px] border-solid border-black w-20 mt-4 text-center
+            class: "border-blue-500 border shadow rounded-md px-6 py-1 mt-4 text-center hover:dark:bg-blue-200 transition duration-500 hover:animate-pulse
             "%> 
 
 
             <input type="submit" value="Login" 
-            class="bg-green-500 border-[1px] border-solid border-black w-20 mt-4 hover:cursor-pointer
+            class="border-blue-500 border shadow rounded-md px-5 py-1 mt-4 text-center hover:dark:bg-blue-200 transition duration-500 hover:animate-pulse
             ">
 
             <!-- CSRF token -->

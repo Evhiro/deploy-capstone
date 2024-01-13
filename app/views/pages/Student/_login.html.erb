@@ -1,4 +1,4 @@
-<body class="flex flex-col items-center">
+<body class="flex flex-col items-center font-serif">
     <div class="text-center mt-24 mb-14 w-36
     md:w-40 md:mt-14">
         <%= image_tag('logo.png', alt: 'logo') %>
@@ -25,7 +25,7 @@
             </label>
             <br>
             <input type="text" type="email" name="email" id="email" 
-            class="
+            class="shadow rounded-lg focus:border-none focus:outline-none focus:ring focus:ring-green-500
             " 
             required>
             <br>
@@ -37,19 +37,19 @@
             </label>
             <br>
             <input type="password" type="password" name="password" id="password" 
-            class="
+            class="shadow rounded-lg focus:border-none focus:outline-none focus:ring focus:ring-green-500
             " 
             required>
             <br>
             <div class="flex justify-between">
 
             <%= link_to "Back", landing_path,
-            class: "bg-green-500 border-[1px] border-solid border-black w-20 mt-4 text-center
+            class: "border-green-500 border shadow rounded-md px-6 py-1 mt-4 text-center hover:animate-pulse hover:dark:bg-green-200 transition duration-500
             "%> 
 
 
             <input type="submit" value="Login" 
-            class="bg-green-500 border-[1px] border-solid border-black w-20 mt-4 hover:cursor-pointer
+            class="border-green-500 border shadow rounded-md px-5 py-1 mt-4 text-center hover:animate-pulse hover:dark:bg-green-200 transition duration-500
             ">
 
             <!-- CSRF token -->

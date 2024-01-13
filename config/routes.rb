@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "/GTNHS", to: "pages#landing", as: "landing"
   match '/sign_out', to: 'pages#sign_out',via: [:delete, :get], as: 'sign_out'
 
+  get "/section" => "pages#test", as: "testing"
+
 
   get "/admin" => "pages#admin", as: "admin_login", account_type: "admin" 
   get "/student" => "pages#student", as: "student_login", account_type: "student" 

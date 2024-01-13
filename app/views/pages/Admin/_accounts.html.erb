@@ -3,19 +3,19 @@
     <main class="flex">
         <nav id="menu" class="border-r-[1px] shadow-lg border-solid border-black-400 w-64 h-[90vh] hidden md:inline">
             <div class="text-gray-600 text-sm text-center p-3">MENU BAR --></div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]" aria-current="page"><%= link_to "Student Database", student_table_path %></div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Teacher Database", teacher_table_path %> </div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Create Announcement", admin_announcement_path %> </div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Create Section", create_section_path %> </div>
-            <div class="font-semibold p-2 bg-slate-100 border-l-4 border-green-500 text-[15px] text-green-500"><%= link_to "Accounts", admin_accounts_path %> </div>
-            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-green-500 text-[15px]"><%= link_to "Settings", admin_settings_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]" aria-current="page"><%= link_to "Student Database", student_table_path %></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "Teacher Database", teacher_table_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "Create Announcement", admin_announcement_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "Create Section", create_section_path %> </div>
+            <div class="font-semibold p-2 bg-slate-100 border-l-4 border-violet-500 text-[15px] text-violet-500"><%= link_to "Accounts", admin_accounts_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "Settings", admin_settings_path %> </div>
         </nav>
         <div>
             <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2"></div>
             <div class="h-96 md:m-5 mx-4">
                 <div class="shadow-md border-2 border-black mb-10">
                     <div class="text-center">
-                        <p class="text-green-500 text-bold text-xl shadow-md
+                        <p class="text-violet-500 text-bold text-xl shadow-md
                         "
                         >MANAGE ACCOUNT
                         </p>
@@ -23,13 +23,13 @@
                     <div class="md:flex">
                          <form action="<%= admin_insert_info_path %>" method="POST" class="p-3 border-r border-black">
 
-                         <p class="text-green-500 text-bold text-xl border-b
+                         <p class="text-violet-500 text-bold text-xl border-b
                          "
                          >REGISTER 
                          </p>  
 
                          <label for="lname"
-                         class="text-green-500 text-[15px]
+                         class="text-violet-500 text-[15px]
                          "> 
                          Last Name:
                          </label>
@@ -40,7 +40,7 @@
                          <br class="m-5">
 
                          <label for="fname"
-                         class="text-green-500 text-[15px]
+                         class="text-violet-500 text-[15px]
                          "> 
                          First Name:
                          </label>
@@ -51,7 +51,7 @@
                          <br class="m-5">
 
                          <label for="birth"
-                         class="text-green-500 text-[15px]
+                         class="text-violet-500 text-[15px]
                          "> 
                          Birthday:
                          </label>
@@ -62,7 +62,7 @@
                          <br class="m-5">
 
                          <label for="e_address"
-                         class="text-green-500 text-[15px]
+                         class="text-violet-500 text-[15px]
                          "> 
                          Address:
                          </label>
@@ -73,7 +73,7 @@
                          <br class="m-5">
 
                          <label for="account_type"
-                         class="text-green-500 text-[12px]">
+                         class="text-violet-500 text-[12px]">
                          Account Type:
                          </label>
                          <select name="account_type" id="account_type" 
@@ -88,7 +88,7 @@
                          <div class="text-center md:text-left md:ml-16">
                             <br>
                             <input type="submit" value="Register" 
-                            class=" bg-green-900 w-40 h-10 text-white text-bold border hover:cursor-pointer
+                            class=" bg-violet-900 w-40 h-10 text-white text-bold border hover:cursor-pointer
                             ">
                         </div>
                         <br>
@@ -100,13 +100,13 @@
                         <% @user.each do |user| %>
                           <div class="border border-black border-solid rounded-md mb-4 ml-2">
 
-                            <p class="text-green-500 text-bold p-3
+                            <p class="text-violet-500 text-bold p-3
                             "
                             >ACCOUNT INFO
                             </p>  
                         <form action="<%= remove_path %>" method="delete">
-                            <p class="border-b shadow p-2"><span class="text-green-500">Email:</span> <%= user.email %></p>
-                            <p class="p-2"><span class="text-green-500">Account Type:</span> <%= user.account_type %></p>
+                            <p class="border-b shadow p-2"><span class="text-violet-500">Email:</span> <%= user.email %></p>
+                            <p class="p-2"><span class="text-violet-500">Account Type:</span> <%= user.account_type %></p>
                             <input type="hidden" name="id" value="<%= user.user_id %>">
                             <input type="submit" value="Delete" class="text-red-500 p-3 border border-black m-2 hover:cursor-pointer">
                         </form>
