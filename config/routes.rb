@@ -3,13 +3,15 @@ Rails.application.routes.draw do
   post 'teacher/student-grading', to: "pages#grading_student", as: "student_grading"
   patch '/change_password', to: "pages#change_password", as: "change_password"
 
-
   #root "pages#getstarted"
   get "/GTNHS", to: "pages#landing", as: "landing"
   match '/sign_out', to: 'pages#sign_out',via: [:delete, :get], as: 'sign_out'
 
   get "/section" => "pages#test", as: "testing"
-
+  get "/view-student" => "pages#view_student", as:"view_student"
+  get "/view-teacher" => "pages#view_teacher", as:"view_teacher"
+  get "/view-class" => "pages#view_class", as:"view_class"
+  get "/view-subject" => "pages#view_subject", as:"view_subject"
 
   get "/admin" => "pages#admin", as: "admin_login", account_type: "admin" 
   get "/student" => "pages#student", as: "student_login", account_type: "student" 

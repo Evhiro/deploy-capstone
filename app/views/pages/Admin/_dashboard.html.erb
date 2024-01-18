@@ -1,0 +1,78 @@
+<body class="">
+    <%= render "pages/Admin/header" %>
+    <main class="flex">
+        <nav id="menu" class="border-r-[1px] shadow-lg border-solid border-black-400 w-64 h-[90vh] hidden md:inline">
+            <div class="text-gray-600 text-sm text-center p-3">MENU BAR --></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]" aria-current="page"><%= link_to "Student Database", student_table_path %></div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "Teacher Database", teacher_table_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "Create Announcement", teacher_table_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "Create Section", admin_settings_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "View Section", admin_settings_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "Accounts", admin_accounts_path %> </div>
+            <div class="font-semibold p-2 hover:bg-slate-100 hover:border-l-4 border-violet-500 text-[15px]"><%= link_to "Settings", admin_settings_path %> </div>
+        </nav>
+        <%= turbo_frame_tag "modal-modal" %>
+        <div>
+            <div class="border-[1px] border-solid  border-gray-200 bg-gray-100 text-gray-400 md:w-[83vw] w-[88vw] h-12 md:m-5 m-4 mb-7 rounded-lg flex items-center pl-2">ACCOUNT: ADMIN</div>
+            <div class="h-96 md:m-5 mx-4">
+                <div class="shadow-md border-2 border-black">
+                <p class="text-violet-500 text-bold text-xl shadow-md text-center font-bold
+                "
+                >DASHBOARD
+                </p>
+                <div class="flex gap-2 justify-around py-8 bg-white-500">
+                    <div class="shadow w-44"
+                    >
+                    <a href="<%= view_student_path %>" data-turbo-frame="modal"><h1 class="text-center text-xl text-white py-2 bg-green-500 font-bold"
+                    >Student
+                    </h1></a>
+                    <p class="bg-gray-300"
+                    >Students Total : <%= @std_count %>
+                    </p>
+                    <div class="text-center py-5">
+                    <%= link_to "Insert Student", testing_path , data: { turbo_frame: "modal-modal" } ,class: "bg-green-500 py-3 px-2 border rounded-md border-black text-sm" %>
+                    </div>
+                    </div>
+
+                    <div class="shadow w-44">
+                    <a href="<%= view_teacher_path %>" data-turbo-frame="modal"><h1 class="text-center text-xl text-white py-2 bg-blue-500 font-bold"
+                    >Teacher
+                    </h1></a>
+                    <p class="bg-gray-300"
+                    >Teachers Total : <%= @teach_count %>
+                    </p>
+                    <div class="text-center py-5">
+                    <%= link_to "Insert Teacher", testing_path , data: { turbo_frame: "modal-modal" } ,class: "bg-blue-500 py-3 px-2 border rounded-md border-black text-sm" %>
+                    </div>
+                    </div>
+
+                    <div class="shadow w-44">
+                    <a href="<%= view_class_path %>" data-turbo-frame="modal"><h1 class="text-center text-xl text-white py-2 bg-yellow-500 font-bold"
+                    >Class
+                    </h1></a>
+                    <p class="bg-gray-300"
+                    >Sections Total : <%= @cls_count %>
+                    </p>
+                    <div class="text-center py-5">
+                    <%= link_to "Insert Section", testing_path , data: { turbo_frame: "modal-modal" } ,class: "bg-yellow-500 py-3 px-2 border rounded-md border-black text-sm" %>
+                    </div>
+                    </div>
+
+                    <div class="shadow w-44">
+                    <a href="<%= view_subject_path %>" data-turbo-frame="modal"><h1 class="text-center text-xl text-white py-2 bg-orange-500 font-bold"
+                    >Subject
+                    </h1></a>
+                    <p class="bg-gray-300"
+                    >Subjects Total : <%= @sub_count %>
+                    </p>
+                    <div class="text-center py-5">
+                    <%= link_to "Insert Subject", testing_path , data: { turbo_frame: "modal-modal" } ,class: "bg-orange-500 py-3 px-2 border rounded-md border-black text-sm" %>
+                    </div>
+                    </div>
+                </div>
+                <%= turbo_frame_tag "modal" %>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>

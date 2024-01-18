@@ -61,10 +61,31 @@ class PagesController < ApplicationController
       render "pages/Admin/_createsection"
     end
     def view_section
-      render "pages/Admin/_viewsection"
+      @std_count = Student.count
+      @teach_count = Teacher.count
+      @cls_count = Section.count
+      @sub_count = Subject.count
+      render "pages/Admin/_dashboard"
     end
     def admin_announcement
       render "pages/Admin/_announcement"
+    end
+
+    def view_student
+      @stud = Student.all
+      render "pages/_student-view"
+    end
+    def view_teacher
+      @stud = Teacher.all
+      render "pages/_teacher-view"
+    end
+    def view_class
+      @stud = Section.all
+      render "pages/_section-view"
+    end
+    def view_subject
+      @stud = Subject.all
+      render "pages/_subject-view"
     end
 
     #STUDENT PAGES
