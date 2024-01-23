@@ -29,7 +29,8 @@ Rails.application.routes.draw do
   get "admin/:email/create-account" => "pages#create_account", as: "create_account"
   get "admin/:email/add-subject" => "pages#add_subject", as: "add_subject"
   get "admin/:email/add-subteacher" => "pages#add_subteacher", as: "add_subteacher"
-
+  get "admin/:email/add-schedule" => "pages#create_sched", as: "schedule"
+  get "admin/:email/assign-stud" => "pages#assign_stud", as: "assign_stud"
   #STUDENT
   get "/student/:email/dashboard" => "pages#student_dashboard", as: "student_dashboard"
   get "/student/:email/settings" => "pages#student_settings", as: "student_settings"

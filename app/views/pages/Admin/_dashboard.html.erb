@@ -25,8 +25,9 @@
                     <p class="bg-gray-300"
                     >Students Total : <%= @std_count %>
                     </p>
-                    <div class="text-center py-5">
-                    <%= link_to "Create Account", create_account_path , data: { turbo_frame: "modal-modal" } ,class: "bg-green-500 py-3 px-2 border rounded-md border-black text-sm" %>
+                    <div class="text-center py-1 flex">
+                    <%= link_to "Create Account", create_account_path , data: { turbo_frame: "modal-modal" } ,class: "bg-green-500 py-1 px-1 border rounded-md border-black text-sm" %>
+                    <%= link_to "Assign Student", assign_stud_path , data: { turbo_frame: "modal-modal" } ,class: "bg-green-500 py-1 px-1 border rounded-md border-black text-sm" %>
                     </div>
                     </div>
 
@@ -49,9 +50,12 @@
                     <p class="bg-gray-300"
                     >Sections Total : <%= @cls_count %>
                     </p>
-                    <div class="text-center py-2 flex">
+                    <div class="text-center py-2">
                     <%= link_to "Create Section", testing_path , data: { turbo_frame: "modal-modal" } ,class: "bg-yellow-500 py-1 px-1 border rounded-md border-black text-xs" %>
-                    <%= link_to "Add Subject-Teacher", add_subteacher_path , data: { turbo_frame: "modal-modal" } ,class: "bg-yellow-500 py-1 px-1 border rounded-md border-black text-xs" %>
+                    <div class="flex">
+                    <%= link_to "Schedule", schedule_path , data: { turbo_frame: "modal-modal" } ,class: "bg-yellow-500 border py-1 px-2 rounded-md border-black text-xs" %>
+                    <%= link_to "Subject-Teacher", add_subteacher_path , data: { turbo_frame: "modal-modal" } ,class: "bg-yellow-500 py-1 px-1 border rounded-md border-black text-xs" %>
+                    </div>
                     </div>
                     </div>
 

@@ -92,6 +92,7 @@ class PagesController < ApplicationController
     def add_subteacher
       @section = Section.all
       @teach = Teacher.all
+      @sub = Subject.all
       render "pages/_add-subteacher-modal"
     end
     def create_account
@@ -99,6 +100,17 @@ class PagesController < ApplicationController
     end
     def add_subject
       render "pages/_create-subject-modal"
+    end
+    def create_sched
+      @section = Section.all
+      @sub = Subject.all
+      @sched = SubjectTeacherSection.all
+      render "pages/_schedule-modal"
+    end
+    def assign_stud
+      @stud = Student.all
+      @sec = Section.all
+      render "pages/_assign-student-modal"
     end
 
 
@@ -244,7 +256,7 @@ class PagesController < ApplicationController
             teacher_id: teacher.teacher_id
           )
 
-          redirect_to create_section_path(email: obfuscated_email)
+          redirect_to dashboard_path(email: obfuscated_email)
 
         end
 
@@ -354,7 +366,7 @@ class PagesController < ApplicationController
           )
           
 
-          redirect_to create_section_path(email: obfuscated_email)
+          redirect_to dashboard_path(email: obfuscated_email)
         end
 
         def add_announce
@@ -402,7 +414,7 @@ class PagesController < ApplicationController
 
             secret_key = Rails.application.credentials.secret_key_base
             obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
-            redirect_to admin_accounts_path(email: obfuscated_email), notice: "Created Successfully"
+            redirect_to dashboard_path(email: obfuscated_email), notice: "Created Successfully"
         end
     
         def account_verify
