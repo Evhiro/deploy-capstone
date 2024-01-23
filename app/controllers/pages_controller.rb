@@ -29,10 +29,6 @@ class PagesController < ApplicationController
       render "pages/_start"
     end
 
-    def test
-      render "pages/_create-section-modal"
-    end
-
     #ADMIN PAGES
     def admin
         render "pages/Admin/_login"
@@ -60,7 +56,7 @@ class PagesController < ApplicationController
       @sched = SubjectTeacherSection.all
       render "pages/Admin/_createsection"
     end
-    def view_section
+    def dashboard
       @std_count = Student.count
       @teach_count = Teacher.count
       @cls_count = Section.count
@@ -87,6 +83,24 @@ class PagesController < ApplicationController
       @stud = Subject.all
       render "pages/_subject-view"
     end
+    #MODAL
+
+    def test
+      @teach = Teacher.all
+      render "pages/_create-section-modal"
+    end
+    def add_subteacher
+      @section = Section.all
+      @teach = Teacher.all
+      render "pages/_add-subteacher-modal"
+    end
+    def create_account
+      render "pages/_create-account-modal"
+    end
+    def add_subject
+      render "pages/_create-subject-modal"
+    end
+
 
     #STUDENT PAGES
     def student
@@ -183,11 +197,13 @@ class PagesController < ApplicationController
     def remove_info
       secret_key = Rails.application.credentials.secret_key_base
       obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
-      put_account = params[:id]
+      remove_acc = params[:id]
 
-      account = User.find_by(user_id: put_account)
-      student_account = Student.find_by(user_id: put_account)
-      teacher_account = Teacher.find_by(user_id: put_account)
+      account = User.find_by(user_id: remove_acc)
+      student_account = Student.find_by(user_id: remove_acc)
+      teacher_account = Teacher.find_by(user_id: remove_acc)
+      subject = Subject.find_by(subject_id: remove_acc)
+      section = Section.find_by(section_id: remove_acc)
 
       if student_account.present?
         student_account.destroy
@@ -196,11 +212,17 @@ class PagesController < ApplicationController
       elsif teacher_account.present?
         teacher_account.destroy
         account.destroy
+      
+      elsif subject.present?
+        subject.destroy
+
+      elsif section.present?
+        section.destroy
 
       else
-        redirect_to admin_accounts_path(email: obfuscated_email)
+        
       end
-        redirect_to admin_accounts_path(email: obfuscated_email)
+        redirect_to dashboard_path(email: obfuscated_email)
     end
 
         def add_section
@@ -286,6 +308,18 @@ class PagesController < ApplicationController
           end
 
           redirect_to create_section_path(email: obfuscated_email)
+        end
+
+        def add_subjects
+          name = params[:name]
+
+          Subject.create(
+            subject_name: name
+          )
+
+          secret_key = Rails.application.credentials.secret_key_base
+          obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
+          redirect_to dashboard_path(email: obfuscated_email)
         end
 
         def add_schedule

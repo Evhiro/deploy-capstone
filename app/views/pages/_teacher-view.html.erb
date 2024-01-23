@@ -57,8 +57,10 @@
                         <%= std.user.email%>
                     </td>
                     <td class="flex items-center px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                        <form action="<%= remove_path %>" method="delete">
+                            <input type="hidden" name="id" value="<%= std.user.user_id %>">
+                            <input type="submit" value="Delete" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">
+                        </form>
                     </td>
                 </tr>
                 <% end %>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  delete 'admin/:email/remove_info', to: "pages#remove_info", as: "remove"
+  delete '/remove_info', to: "pages#remove_info", as: "remove"
   post 'teacher/student-grading', to: "pages#grading_student", as: "student_grading"
   patch '/change_password', to: "pages#change_password", as: "change_password"
 
@@ -23,8 +23,12 @@ Rails.application.routes.draw do
   get "/admin/:email/accounts" => "pages#admin_accounts", as: "admin_accounts"
   get "/admin/:email/settings" => "pages#admin_settings", as: "admin_settings"
   get "/admin/:email/create-section" => "pages#create_section", as: "create_section"
-  get "/admin/:email/view-section" => "pages#view_section", as: "view_section"
+  get "/admin/:email/dashboard" => "pages#dashboard", as: "dashboard"
   get "/admin/:email/announcement" => "pages#admin_announcement", as: "admin_announcement"
+  #MODAL
+  get "admin/:email/create-account" => "pages#create_account", as: "create_account"
+  get "admin/:email/add-subject" => "pages#add_subject", as: "add_subject"
+  get "admin/:email/add-subteacher" => "pages#add_subteacher", as: "add_subteacher"
 
   #STUDENT
   get "/student/:email/dashboard" => "pages#student_dashboard", as: "student_dashboard"
@@ -43,9 +47,10 @@ Rails.application.routes.draw do
   post "/student/log", to: "pages#account_verify", as:"student_log", account_type: "student"
   post "/teacher/log", to: "pages#account_verify", as:"teacher_log", account_type: "teacher"
   post "/admin/log", to: "pages#account_verify", as:"admin_log", account_type: "admin"
-  post "/admin/create/info", to: "pages#create_student_teacher", as: "admin_insert_info"
+  post "/admin/:email/create-info", to: "pages#create_student_teacher", as: "admin_insert_info"
   post "/admin/create/section", to: "pages#add_section", as:"add_section"
   post "/admin/assign/teacher", to: "pages#add_subject_teacher", as: "add_subject_teacher"
+  post "/admin/add-subject", to: "pages#add_subjects", as: "add_subjects"
   post "/admin/assign/student", to: "pages#add_student", as: "add_student"
   post "/admin/create/schedules",to: "pages#add_schedule", as: "add_schedule"
   post "/admin/add/announcement", to: "pages#add_announce", as: "add_announce"
