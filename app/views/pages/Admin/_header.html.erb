@@ -1,4 +1,4 @@
-<nav class="flex justify-between items-center border-b-[1px] border-solid border-black-400 shadow-lg h-14 bg-violet-600 text-white relative">
+<nav class="flex justify-between items-center border-b-[1px] border-solid border-black-400 shadow-lg h-14 bg-violet-600 text-white">
     <ul class="list-none flex justify-around gap-32 pl-5">
         <li class="text-lg font-bold">ADMIN</li>
     </ul>
@@ -42,7 +42,9 @@
         </div>
     </div>
 </nav>
-
+<div class="fixed left-5 bottom-5">
+    <%= link_to "Announce", announce_modal_path , data: { turbo_frame: "modal-modal" }, class: "border border-black p-2 bg-violet-500 text-md font-bold"%>
+</div>
 <script>
     const button = document.getElementById('dropdownInformationButton');
     const dropdown = document.getElementById('dropdownInformation');

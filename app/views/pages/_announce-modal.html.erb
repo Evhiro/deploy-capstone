@@ -7,7 +7,7 @@
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 dark:bg-violet-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Create Section
+                    Add Subject Teacher
                 </h3>
                 <a href="#"><button type="button" class="text-gray-400 bg-transparent bg-gray-200 hover:text-red-900 rounded-full text-xs w-6 h-6 ms-auto inline-flex justify-center items-center dark:hover:bg-red-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -17,30 +17,19 @@
                 </button></a>
             </div>
             <!-- Modal body -->
-            <form action="<%= add_section_path %>" method="POST" class="p-4 md:p-5">
+            <form action="<%= add_announce_path %>" method="POST" class="p-4 md:p-5">
                 <div class="grid gap-4 mb-4 grid-cols-6">
                     <div class="col-span-2 sm:col-span-3">
-                        <label for="section_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Section Name</label>
-                        <input type="text" name="section_name" id="section_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type section name" required>
+                        <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                        <input type="text" name="title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
                     </div>
-                    <div class="col-span-3 sm:col-span-3">
-                        <label for="grade_lvl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grade lvl</label>
-                        <select name="grade_lvl" id="grade_lvl" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                            <option>Select Grade lvl</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
+                    <div class="col-span-2 sm:col-span-3">
+                        <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                        <input type="date" name="date" id="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name">
                     </div>
-                    <div class="col-span-3 sm:col-span-6">
-                        <label for="advisor_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Advisor</label>
-                        <select name="advisor_name" id="advisor_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                            <option>Select Advisor</option>
-                            <% @teach.each do |t| %>
-                            <option value="<%= t.teacher_id %>"><%= "#{t.fname} #{t.lname}"%></option>
-                            <% end %>
-                        </select>
+                    <div class="col-span-6">
+                        <label for="desc" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                        <textarea cols="30" rows="10" name="desc" id="desc" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Announcement" required=""></textarea>
                     </div>
                 </div>
                 <div class="flex justify-between p-4">

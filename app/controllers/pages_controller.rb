@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
     before_action :require_login, except: [:landing, :getstarted, :admin, :student, :teacher, :login_check, :account_verify]
-    before_action :authenticate_admin!, only: [:student_table, :teacher_table, :admin_announcement, :admin_accounts, :admin_settings, :create_section]
+    before_action :authenticate_admin!, only: [:student_table, :teacher_table, :admin_announcement, :admin_accounts, :admin_settings, :create_section, :dashboard]
     before_action :authenticate_teacher!, only: [:teacher_dashboard, :teacher_announcement, :teacher_grades, :teacher_schedule, :teacher_settings]
     before_action :authenticate_student!, only: [:student_dashboard, :student_announcement, :student_grades, :student_schedule,:student_settings]
     before_action :not_logged, only: [:landing, :admin, :student, :teacher]
@@ -112,7 +112,9 @@ class PagesController < ApplicationController
       @sec = Section.all
       render "pages/_assign-student-modal"
     end
-
+    def announce_modal
+      render "pages/_announce-modal"
+    end
 
     #STUDENT PAGES
     def student
@@ -243,9 +245,7 @@ class PagesController < ApplicationController
           grade_lvl = params[:grade_lvl]
           section_name = params[:section_name]
           advisor_name = params[:advisor_name]
-          name_parts = advisor_name.split
-          first_name = name_parts.first
-          teacher = Teacher.find_by(fname: first_name)
+          teacher = Teacher.find_by(fname: advisor_name)
           generator = UniqueIntegerGenerator.new(1000..9999)
           section_id = generator.generate_unique_integer 
 
@@ -253,7 +253,7 @@ class PagesController < ApplicationController
             section_id: section_id,
             grade_lvl: grade_lvl,
             section_name: section_name,
-            teacher_id: teacher.teacher_id
+            teacher_id: advisor_name
           )
 
           redirect_to dashboard_path(email: obfuscated_email)
@@ -267,9 +267,7 @@ class PagesController < ApplicationController
           section = Section.find_by(section_name: section_name)
           
           teacher_name = params[:sub_teacher]
-          name_parts = teacher_name.split
-          last_name = name_parts.last
-          teacher = Teacher.find_by(lname: last_name)
+          teacher = Teacher.find_by(teacher_id: teacher_name)
 
           subject_name = params[:subject_name]
           subject = Subject.find_by(subject_name: subject_name)
@@ -277,27 +275,21 @@ class PagesController < ApplicationController
           generator = UniqueIntegerGenerator.new(1000..9999)
           id = generator.generate_unique_integer
 
-        
-          SubjectTeacherSection.create(
+          sub_sec = SubjectTeacherSection.find_by(subject_id: subject.subject_id, section_id: section.section_id)
+          
+          if sub_sec.present?
+            sub_sec.update(
+              teacher_id: teacher.teacher_id
+            )
+          else
+            SubjectTeacherSection.create(
             subject_teacher_sections_id: id,
             section_id: section.section_id,
             subject_id: subject.subject_id,
             teacher_id: teacher.teacher_id
           )
-          
-          @student_get = Student.where(section_id: section.section_id)
-
-          @student_get.each do |get|
-
-          StudentGrade.create( 
-            student_grade_id: generator.generate_unique_integer,
-            section_id: section.section_id,
-            student_id: get.student_id,
-            subject_id: subject.subject_id,
-            teacher_id: teacher.teacher_id
-          )
-
           end
+          
 
           redirect_to create_section_path(email: obfuscated_email)
         end
@@ -323,14 +315,20 @@ class PagesController < ApplicationController
         end
 
         def add_subjects
+          secret_key = Rails.application.credentials.secret_key_base
+          obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
           name = params[:name]
 
+          subject_exist = Subject.find_by(subject_name: name)
+          
+          if subject_exist.present?
+            
+          else
           Subject.create(
             subject_name: name
           )
+          end
 
-          secret_key = Rails.application.credentials.secret_key_base
-          obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
           redirect_to dashboard_path(email: obfuscated_email)
         end
 
@@ -427,7 +425,7 @@ class PagesController < ApplicationController
         
               case params[:account_type]
               when "admin"
-                redirect_to student_table_path(email: obfuscated_email)
+                redirect_to dashboard_path(email: obfuscated_email)
               when "student"
                 redirect_to student_dashboard_path(email: obfuscated_email)
               when "teacher"
@@ -447,7 +445,7 @@ class PagesController < ApplicationController
               obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
               case current_user.account_type
               when "admin"
-                redirect_to student_table_path(email: obfuscated_email)
+                redirect_to dashboard_path(email: obfuscated_email)
               when "student"
                 redirect_to student_dashboard_path(email: obfuscated_email)
               when "teacher"
@@ -462,7 +460,7 @@ class PagesController < ApplicationController
               obfuscated_email = Digest::SHA256.hexdigest("#{current_user.email}-#{secret_key}")
               case current_user.account_type
               when "admin"
-                redirect_to student_table_path(email: obfuscated_email)
+                redirect_to dashboard_path(email: obfuscated_email)
               when "student"
                 redirect_to student_dashboard_path(email: obfuscated_email)
               when "teacher"
