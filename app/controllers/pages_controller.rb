@@ -4,6 +4,8 @@ class PagesController < ApplicationController
     before_action :authenticate_teacher!, only: [:teacher_dashboard, :teacher_announcement, :teacher_grades, :teacher_schedule, :teacher_settings]
     before_action :authenticate_student!, only: [:student_dashboard, :student_announcement, :student_grades, :student_schedule,:student_settings]
     before_action :not_logged, only: [:landing, :admin, :student, :teacher]
+
+    
     
     class UniqueIntegerGenerator
       def initialize(range)
@@ -467,10 +469,11 @@ class PagesController < ApplicationController
               when "teacher"
                 redirect_to teacher_dashboard_path(email: obfuscated_email)
               else
+                flash[:alert] = "Invalid email or password"
                 redirect_to landing_path
               end
             else
-              flash.now[:alert] = "Invalid email or password"
+              flash[:alert] = "Invalid email or password"
               redirect_to landing_path
             end
           end
