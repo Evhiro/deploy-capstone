@@ -289,7 +289,6 @@ class PagesController < ApplicationController
             teacher_id: teacher.teacher_id
           )
           end
-          
 
           redirect_to create_section_path(email: obfuscated_email)
         end
@@ -311,7 +310,43 @@ class PagesController < ApplicationController
             student.update!(section_id: section.id)
           end
 
+          @count_subjects = SubjectTeacherSection.where(section_id: section.id )
+          check_student = StudentGrade.find_by(student_id: student.id)
+
+          @count_subjects.each do |t|
+            if check_student.present?
+              check_student.update!(
+                section_id: section.id ,
+                subject_id: t.subject_id,
+                teacher_id: t.teacher_id
+              )
+            else
+              StudentGrade.create!(
+                first_grading: nil,
+                second_grading: nil,
+                third_grading: nil,
+                fourth_grading: nil,
+                section_id: section.id,
+                subject_id: t.subject_id,
+                student_id: student.id,
+                average: nil,
+                result: nil,
+                teacher_id: t.teacher_id
+              )
+            end
+          end
+
           redirect_to create_section_path(email: obfuscated_email)
+        end
+
+        def student_grade_render
+          @sec = Section.all
+          @stud = Student.all
+          @sub = Subject.all
+          render "pages/_student-grade-modal"
+        end
+        def student_grade_addding
+
         end
 
         def add_subjects
@@ -402,6 +437,7 @@ class PagesController < ApplicationController
             hashed_password = BCrypt::Password.create(password)
 
             User.create(user_id: user_id, email: email, password_digest: hashed_password, account_type: account_type.downcase)
+
 
             
             if account_type == "student"

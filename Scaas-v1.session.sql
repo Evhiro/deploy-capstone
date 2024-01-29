@@ -1,1 +1,1 @@
-SELECT * FROM sections
+SELECT * FROM student_grades

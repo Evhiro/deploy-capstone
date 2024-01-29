@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get "admin/:email/add-schedule" => "pages#create_sched", as: "schedule"
   get "admin/:email/assign-stud" => "pages#assign_stud", as: "assign_stud"
   get "admin/:email/announce-modal" => "pages#announce_modal", as: "announce_modal"
+  get "admin/:email/student_grade_render" => "pages#student_grade_render", as: "student_grade_render"
   #STUDENT
   get "/student/:email/dashboard" => "pages#student_dashboard", as: "student_dashboard"
   get "/student/:email/settings" => "pages#student_settings", as: "student_settings"
@@ -46,6 +47,8 @@ Rails.application.routes.draw do
   get "/steacher/:email/grades" => "pages#teacher_grades", as: "teacher_grades"
   get "/teacher/:email/schedule" => "pages#teacher_schedule", as: "teacher_schedule"
 
+  
+  post "/admin/add/student_grade_addding", to: "pages#student_grade_addding", as: "student_grade_addding"
   post "/student/log", to: "pages#account_verify", as:"student_log", account_type: "student"
   post "/teacher/log", to: "pages#account_verify", as:"teacher_log", account_type: "teacher"
   post "/admin/log", to: "pages#account_verify", as:"admin_log", account_type: "admin"
